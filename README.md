@@ -5,10 +5,11 @@ School project for PV247 (FI MUNI Brno)
 
 ## Team members ##
 * Pavol Loffay, p.loffay@gmail.com
-* Maros Surovy, sharksyk@gmail.com
-* Martin Vrábel,
-* Ondra,
+* Maroš Surový, sharksyk@gmail.com
+* Martin Vrábel, m.vrabel@mail.muni.cz
+* Ondřej Pražák,
+* Rabah Beggar, 
 
 ## Setup environment ##
 * Windows
-* Visual studio 2013 <
+* Visual studio 2013 
