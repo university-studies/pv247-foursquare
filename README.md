@@ -8,8 +8,8 @@ School project for PV247 (FI MUNI Brno)
 * Maroš Surový, sharksyk@gmail.com
 * Martin Vrábel, m.vrabel@mail.muni.cz
 * Ondřej Pražák, ondpraz@gmail.com
-* Rabah Beggar, 
+* Rabah Beggar, Rabah02@outlook.com
 
 ## Setup environment ##
 * Windows
-* Visual studio 2013 
+* Visual studio 2013
