@@ -11,5 +11,5 @@ School project for PV247 (FI MUNI Brno)
 * Rabah Beggar, Rabah02@outlook.com
 
 ## Setup environment ##
-* Windows
-* Visual studio 2013
+* Windows 
+* visual studio 2013
