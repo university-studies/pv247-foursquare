@@ -11,7 +11,7 @@ namespace foursquare_places.Controllers
     {
         public ActionResult Index()
         {
-            return View(Foursquare.SearchVenues());
+            return View(Foursquare.SearchVenues("49.211417, 16.597629"));
         }
 
         public ActionResult About()

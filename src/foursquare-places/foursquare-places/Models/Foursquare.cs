@@ -12,12 +12,12 @@ namespace foursquare_places.Models
         private const string CLIENT_ID = "GDHBR0DWONQMGKS0SAFMLUKLZ2GZADYBYZGOKC3LTPGLTONF";
         private const string CLIENT_SECRET = "WP5HNM3YCUOIPW2FKHC2G1BETQWE5LVTUBRNYCU2CG2ONJQL";
 
-        public static List<Venue> SearchVenues()
+        public static List<Venue> SearchVenues(string location)
         {
             var sharpSquare = new SharpSquare(CLIENT_ID, CLIENT_SECRET);
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("ll", "49.211417, 16.597629");
+            parameters.Add("ll", location);
             parameters.Add("limit", "50");
             parameters.Add("radius", "5000");
 
