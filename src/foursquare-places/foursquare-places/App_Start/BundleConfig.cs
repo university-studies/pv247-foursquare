@@ -19,6 +19,9 @@ namespace foursquare_places
                 .Include("~/Scripts/site/config.js")
                 .Include("~/Scripts/site/map.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/places")
+                .IncludeDirectory("~/Scripts/places", "*.js"));
+
             //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
             //           "~/Scripts/jquery.validate*"));
 

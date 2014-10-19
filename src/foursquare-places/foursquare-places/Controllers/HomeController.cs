@@ -14,10 +14,10 @@ namespace foursquare_places.Controllers
             return View(Foursquare.SearchVenues("49.211417, 16.597629"));
         }
 
-        public ActionResult About()
+        /*public ActionResult About()
         {
             ViewBag.Message = "About Foursquare places";
             return View();
-        }
+        }*/
     }
 }
