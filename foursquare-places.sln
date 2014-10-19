@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foursquare-places", ".\src\foursquare-places\foursquare-places\foursquare-places.csproj", "{92EB6268-6275-45E7-94D6-1B0A5C1A9A35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foursquare-places", ".\src\foursquare-places\foursquare-places.csproj", "{92EB6268-6275-45E7-94D6-1B0A5C1A9A35}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpSquare", ".\src\SharpSquare\SharpSquare.csproj", "{F6163F95-DA23-49C6-B58B-CEF0CF0B2C83}"
 EndProject
