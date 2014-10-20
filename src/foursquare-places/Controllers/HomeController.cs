@@ -14,10 +14,10 @@ namespace foursquare_places.Controllers
             return View();
         }
 
-        public ActionResult About()
+        /*public ActionResult About()
         {
             ViewBag.Message = "About Foursquare places";
             return View();
-        }
+        }*/
     }
 }
