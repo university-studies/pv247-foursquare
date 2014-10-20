@@ -1,6 +1,6 @@
 ﻿var app = angular.module('FoursquarePlaces', ['ngResource']);
 
-app.controller('MapController', ['$scope', 'Geolocation', function ($scope, Geolocation) {
+app.controller('MapController', ['$scope', 'Geolocation', 'CurrentLocation', function ($scope, Geolocation, CurrentLocation) {
     $scope.greeting = "hello from angular!";
 
     var map;
@@ -15,7 +15,6 @@ app.controller('MapController', ['$scope', 'Geolocation', function ($scope, Geol
     };
 
     var processGeolocation = function (data) {
-
         var infowindow = new google.maps.InfoWindow({
             map: map,
             position: data.position,
@@ -23,12 +22,20 @@ app.controller('MapController', ['$scope', 'Geolocation', function ($scope, Geol
         });
         map.setCenter(data.position);
     };
+
+    var advertizeCurrentLocation = function (data) {
+        CurrentLocation.save(data.position);
+    };
     
     Geolocation.getLocation().then(function (data) {
         console.log(data);
+        advertizeCurrentLocation(data);
         init();
         processGeolocation(data);
+
     });
+
+    
         
 }])
 
