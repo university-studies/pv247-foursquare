@@ -2,10 +2,10 @@
 
 $(function () {
 
-    console.log("jquery beffore init");
-    console.log("jquery after init");
+    //console.log("jquery beffore init");
+    //console.log("jquery after init");
 
-    google.maps.event.addDomListener(window, 'load', cz.muni.pv247.foursquare.map.init);
+    //google.maps.event.addDomListener(window, 'load', cz.muni.pv247.foursquare.map.init);
 })
 
 cz.muni.pv247.foursquare.map = (function (config) {
