@@ -6,13 +6,15 @@ using System.Net.Http;
 using System.Web.Http;
 using foursquare_places.Models;
 using FourSquare.SharpSquare.Entities;
+using System.Threading.Tasks;
 
 namespace foursquare_places.Controllers
 {
     public class VenuesController : ApiController
     {
         // POST /api/venues
-        public HttpResponseMessage Post(string location)
+        [HttpPost]
+        public HttpResponseMessage Post([FromBody]string location)
         {
             if (ModelState.IsValid && !string.IsNullOrEmpty(location))
             {
@@ -21,7 +23,7 @@ namespace foursquare_places.Controllers
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.NotAcceptable, "Empty location");
+                return Request.CreateResponse(HttpStatusCode.NotFound, "Empty location");
             }
 
         }
