@@ -16,7 +16,9 @@ namespace foursquare_places.Controllers
         [HttpPost]
         public HttpResponseMessage Post([FromBody]string location)
         {
-            if (ModelState.IsValid && !string.IsNullOrEmpty(location))
+            location = "49.19506,16.606837";
+
+            if (!string.IsNullOrEmpty(location))
             {
                 var venues = Foursquare.SearchVenues(location);
                 return Request.CreateResponse<List<Venue>>(HttpStatusCode.OK, venues, "application/json");

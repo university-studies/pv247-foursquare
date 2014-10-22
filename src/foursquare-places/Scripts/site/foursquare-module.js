@@ -1,6 +1,6 @@
-﻿var app = angular.module('FoursquarePlaces', ['ngResource']);
+﻿var module = angular.module('FoursquareModule', ['ngResource']);
 
-app.directive('locationsMap', function () {
+module.directive('locationsMap', function () {
     return {
         restrict: 'A',
         replace: true,
@@ -8,4 +8,3 @@ app.directive('locationsMap', function () {
         controller: 'MapController'
     }
 });
-

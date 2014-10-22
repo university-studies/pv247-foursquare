@@ -1,4 +1,6 @@
-﻿app.controller('MapController', ['$scope', 'Geolocation', 'CurrentLocation', function ($scope, Geolocation, CurrentLocation) {
+﻿module = angular.module('FoursquareModule');
+
+module.controller('MapController', ['$scope', 'Geolocation', 'CurrentLocation', function ($scope, Geolocation, CurrentLocation) {
     $scope.greeting = "hello from angular!";
 
     var map;

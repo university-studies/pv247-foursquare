@@ -1,8 +1,10 @@
-﻿app.factory('CurrentLocation', function ($resource) {
-    return $resource('api/location/:id')
+﻿module = angular.module('FoursquareModule');
+
+module.factory('CurrentLocation', function ($resource) {
+    return $resource('api/venues')
 });
 
-app.factory('Geolocation', [function () {
+module.factory('Geolocation', [function () {
 
     return {
         getLocation: function () {
