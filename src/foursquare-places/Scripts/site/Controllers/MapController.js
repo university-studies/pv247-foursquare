@@ -26,22 +26,37 @@ module.controller('MapController', ['$scope', 'Geolocation', 'CurrentLocation', 
     var advertizeCurrentLocation = function (data) {
         //CurrentLocation.save(data.position);
         
-       
-        var loc = {latitude: data.position.B, longitude: data.position.k}
-        $http.post('/api/venues', loc)
-            .success(function (data, status, headers, config) {
+        
+        var loc = {latitude: data.position.k, longitude: data.position.B}
+        return $http.post('/api/venues', loc)
+            /*.success(function (data, status, headers, config) {
                 console.log("succ")
             })
             .error(function (data, status, headers, config) {
                 console.log("err")
-            })
+            })  */    
 
     };
 
+    var markVenues = function (venues) {
+        for (var i = 0; i < venues.length; i++) {
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(venues[i].location.lat, venues[i].location.lng),
+                map: map                
+            });
+
+        }
+    }
+
     Geolocation.getLocation().then(function (data) {
         console.log(data);
-        advertizeCurrentLocation(data);
-        init();
-        processGeolocation(data);
+        advertizeCurrentLocation(data).then(function (incoming) {
+            init();
+            processGeolocation(data);
+            markVenues(incoming.data)
+            console.log("there!")
+        });
+        
     });
 }]);
