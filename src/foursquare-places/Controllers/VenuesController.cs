@@ -7,6 +7,7 @@ using System.Web.Http;
 using foursquare_places.Models;
 using FourSquare.SharpSquare.Entities;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace foursquare_places.Controllers
 {
@@ -14,13 +15,13 @@ namespace foursquare_places.Controllers
     {
         // POST /api/venues
         [HttpPost]
-        public HttpResponseMessage Post([FromBody]string location)
+        public HttpResponseMessage Post([FromBody]foursquare_places.Models.Location location)
         {
-            location = "49.19506,16.606837";
 
-            if (!string.IsNullOrEmpty(location))
+            Debug.WriteLine(location);
+            if (!string.IsNullOrEmpty(location.ToString()))
             {
-                var venues = Foursquare.SearchVenues(location);
+                var venues = Foursquare.SearchVenues(location.ToString());
                 return Request.CreateResponse<List<Venue>>(HttpStatusCode.OK, venues, "application/json");
             }
             else
