@@ -20,7 +20,7 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
 
     $scope.$watch('currentPosition', function(newValue, oldValue) {
         if (newValue) {
-            initVenues();
+            initVenues(newValue);
 
             var latitude = newValue.latitude;
             var longitude = newValue.longitude;
@@ -49,7 +49,7 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
         });
     });
 
-    function initVenues() {
-        venuesLoader.getAll($scope, $scope.venues);
+    function initVenues(position) {
+        venuesLoader.getAll($scope, position);
     }
 }]);
