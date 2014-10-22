@@ -16,7 +16,11 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
                 };
             });
         });
+    } else {
+        // TODO - show some location or ERROR
     }
+
+     
 
     $scope.$watch('currentPosition', function(newValue, oldValue) {
         if (newValue) {
