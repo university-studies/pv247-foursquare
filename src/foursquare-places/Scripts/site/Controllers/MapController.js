@@ -7,7 +7,7 @@ module.controller('MapController', ['$scope', 'Geolocation', 'CurrentLocation', 
 
     var init = function () {
         var mapOptions = {
-            zoom: 15,
+            zoom: 18,
             center: new google.maps.LatLng(40.69847032728747, -73.9514422416687)
         }
 
@@ -43,7 +43,8 @@ module.controller('MapController', ['$scope', 'Geolocation', 'CurrentLocation', 
 
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(venues[i].location.lat, venues[i].location.lng),
-                map: map                
+                map: map,
+                title: venues[i].name
             });
 
         }
@@ -54,7 +55,8 @@ module.controller('MapController', ['$scope', 'Geolocation', 'CurrentLocation', 
         advertizeCurrentLocation(data).then(function (incoming) {
             init();
             processGeolocation(data);
-            markVenues(incoming.data)
+            markVenues(incoming.data);
+            console.log(incoming.data);
             console.log("there!")
         });
         
