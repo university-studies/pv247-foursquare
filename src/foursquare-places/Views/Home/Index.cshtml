@@ -12,7 +12,8 @@
     <title>@ViewBag.Title</title>
 
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-resource.min.js"></script>
 
     @Styles.Render("~/Content/css")
@@ -20,6 +21,7 @@
     <script type="text/javascript" src="./Scripts/site/foursquare-module.js"></script>
     <script type="text/javascript" src="./Scripts/site/Controllers/MapController.js"></script>
     <script type="text/javascript" src="./Scripts/site/Services/MapService.js"></script>
+    <script type="text/javascript" src="./Scripts/site/Services/VenuesLoader.js"></script>
 
 </head>
 <body>
@@ -51,7 +53,8 @@
         
         @*<map id="map-canvas"></map>*@
         
-        <div locations-map></div>
+            <div id="areaMap" map-directive class="body-content"></div>
+
 
         
         <hr />
