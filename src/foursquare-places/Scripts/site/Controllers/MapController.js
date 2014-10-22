@@ -1,6 +1,6 @@
 ﻿module = angular.module('FoursquareModule');
 
-module.controller('MapController', ['$scope', 'Geolocation', 'CurrentLocation', function ($scope, Geolocation, CurrentLocation) {
+module.controller('MapController', ['$scope', 'Geolocation', 'CurrentLocation', '$http', function ($scope, Geolocation, CurrentLocation, $http) {
     $scope.greeting = "hello from angular!";
 
     var map;
@@ -24,7 +24,18 @@ module.controller('MapController', ['$scope', 'Geolocation', 'CurrentLocation', 
     };
 
     var advertizeCurrentLocation = function (data) {
-        CurrentLocation.save(data.position);
+        //CurrentLocation.save(data.position);
+        
+       
+        var loc = {latitude: data.position.B, longitude: data.position.k}
+        $http.post('/api/venues', loc)
+            .success(function (data, status, headers, config) {
+                console.log("succ")
+            })
+            .error(function (data, status, headers, config) {
+                console.log("err")
+            })
+
     };
 
     Geolocation.getLocation().then(function (data) {
