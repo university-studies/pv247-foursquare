@@ -22,14 +22,25 @@ namespace foursquare_places.Controllers
         }
         public ActionResult UserClicksAuthenticate()
         {
-            //var redirectUri = Request.Url.Authority + this.Url.Action("AuthorizeCallback", new { userCode = "userCode" });
-            
-            //localhost test
-            //string redirectUri = "http://localhost:52978/";
-            sharpSquare = new SharpSquare(clientId, clientSecret);
+            var redirectUri = Request.Url.Authority + this.Url.Action("AuthorizeCallback", new { userCode = "userCode" });
+            var sharpSquare = new SharpSquare(clientId, clientSecret);
             var authUrl = sharpSquare.GetAuthenticateUrl(redirectUri);
 
             return new RedirectResult(authUrl, permanent: false);
+        }
+
+        public ActionResult AuthorizeCallback(string code, string userCode)
+        {
+            var redirectUri = Request.Url.Authority + this.Url.Action("AuthorizeCallback", new { userCode = userCode });
+
+            var sharpSquare = new SharpSquare(clientId, clientSecret);
+            var accessToken = sharpSquare.GetAccessToken(redirectUri, code);
+
+            sharpSquare.SetAccessToken(accessToken);
+
+            List<VenueHistory> venues = sharpSquare.GetUserVenueHistory();
+
+            return View("Index");
         }
 
         /*public ActionResult About()
