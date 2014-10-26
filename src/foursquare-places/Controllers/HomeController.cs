@@ -13,8 +13,8 @@ namespace foursquare_places.Controllers
     {
         static string clientId = "T4JTQ1SK5CDOD4HSBA00HIZRTR1H04JP43RXCSIOLE0IDWRK";
         static string clientSecret = "BSKKMLGAFHZ1VSUL4FL5CP0D31QIGJIZV0WPNII3KQUZQVLG";
-        static string redirectUri = "http://foursquare-places.azurewebsites.net/";
-        static SharpSquare sharpSquare;
+        //static string redirectUri = "http://foursquare-places.azurewebsites.net/";
+        SharpSquare sharpSquare;
 
         public ActionResult Index()
         {
@@ -22,7 +22,7 @@ namespace foursquare_places.Controllers
         }
         public ActionResult UserClicksAuthenticate()
         {
-            var redirectUri = Request.Url.Authority + this.Url.Action("AuthorizeCallback", new { userCode = "userCode" });
+            var redirectUri = Request.Url.Authority + this.Url.Action("AuthorizeCallback", new { userCode = "http://foursquare-places.azurewebsites.net" });
             var sharpSquare = new SharpSquare(clientId, clientSecret);
             var authUrl = sharpSquare.GetAuthenticateUrl(redirectUri);
 
