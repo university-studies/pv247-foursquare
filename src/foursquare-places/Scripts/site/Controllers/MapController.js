@@ -6,6 +6,7 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
     $scope.venues = [];
     $scope.currentPosition = null;
     $scope.map = null;
+    $scope.markers = [];
 
     if ($window.navigator.geolocation) {
         $window.navigator.geolocation.getCurrentPosition(function (position) {
@@ -41,15 +42,19 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
 
 
     $scope.$watch('venues', function (newValue, oldValue) {
+        console.log($scope.venues);
+        $scope.markers = [];
         newValue.forEach(function (item, i) {
 
             var latlng = new google.maps.LatLng(item.location.lat, item.location.lng);
 
-            var infowindow = new google.maps.Marker({
+            var marker = new google.maps.Marker({
                 map: $scope.map,
                 position: latlng,
-                title: item.name
+                title: item.name,
+                clickable: true,
             });
+            $scope.markers.push(marker);
         });
     });
 
