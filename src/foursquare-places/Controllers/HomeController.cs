@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using foursquare_places.Models;
 using FourSquare.SharpSquare.Core;
 using FourSquare.SharpSquare.Entities;
+using System.Web.UI.WebControls;
+using System.Diagnostics;
+using System.Net;
 
 namespace foursquare_places.Controllers
 {
@@ -13,35 +16,34 @@ namespace foursquare_places.Controllers
     {
         static string clientId = "T4JTQ1SK5CDOD4HSBA00HIZRTR1H04JP43RXCSIOLE0IDWRK";
         static string clientSecret = "BSKKMLGAFHZ1VSUL4FL5CP0D31QIGJIZV0WPNII3KQUZQVLG";
-        //static string redirectUri = "http://foursquare-places.azurewebsites.net/";
-        SharpSquare sharpSquare;
+        static string redirectUri = "http://foursquare-places.azurewebsites.net/Home/AuthorizeCallback";
+        SharpSquare service = new SharpSquare(clientId, clientSecret);
+
+        public ActionResult Login()
+        {
+
+            //string url = "https://foursquare.com/oauth2/authenticate?client_id=" + clientId + "&response_type=code&redirect_uri=" + redirectUri;
+            //string url = "https://foursquare.com/oauth2/authenticate?display=touch&client_id=" + clientId + "&client_secret=" + clientSecret + "&response_type=token&redirect_uri=" + redirectUri;
+
+            string url = service.GetAuthenticateUrl(redirectUri);
+            return new RedirectResult(url,false);
+        }
+
+        public ActionResult AuthorizeCallback(string code,string token)
+        {
+            var accessToken = service.GetAccessToken(redirectUri, token);
+
+            return View("Index");
+
+            //Session["AccessToken"] = acctoken;
+        }
+
 
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult UserClicksAuthenticate()
-        {
-            var redirectUri = Request.Url.Authority + this.Url.Action("AuthorizeCallback", new { userCode = "http://foursquare-places.azurewebsites.net" });
-            var sharpSquare = new SharpSquare(clientId, clientSecret);
-            var authUrl = sharpSquare.GetAuthenticateUrl(redirectUri);
 
-            return new RedirectResult(authUrl, permanent: false);
-        }
-
-        public ActionResult AuthorizeCallback(string code, string userCode)
-        {
-            var redirectUri = Request.Url.Authority + this.Url.Action("AuthorizeCallback", new { userCode = userCode });
-
-            var sharpSquare = new SharpSquare(clientId, clientSecret);
-            var accessToken = sharpSquare.GetAccessToken(redirectUri, code);
-
-            sharpSquare.SetAccessToken(accessToken);
-
-            List<VenueHistory> venues = sharpSquare.GetUserVenueHistory();
-
-            return View("Index");
-        }
 
         /*public ActionResult About()
         {
