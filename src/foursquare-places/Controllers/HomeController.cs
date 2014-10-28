@@ -16,7 +16,9 @@ namespace foursquare_places.Controllers
     {
         static string clientId = "T4JTQ1SK5CDOD4HSBA00HIZRTR1H04JP43RXCSIOLE0IDWRK";
         static string clientSecret = "BSKKMLGAFHZ1VSUL4FL5CP0D31QIGJIZV0WPNII3KQUZQVLG";
-        static string redirectUri = "http://foursquare-places.azurewebsites.net/Home/AuthorizeCallback";
+        //Test url
+        //static string redirectUri = "https://localhost:44301/Home/AuthorizeCallback";
+        static string redirectUri = "https://foursquare-places.azurewebsites.net/Home/AuthorizeCallback";
         SharpSquare service = new SharpSquare(clientId, clientSecret);
 
         public ActionResult Login()
@@ -29,15 +31,14 @@ namespace foursquare_places.Controllers
             return new RedirectResult(url,false);
         }
 
-        public ActionResult AuthorizeCallback(string code,string token)
+        public ActionResult AuthorizeCallback(string temp,string code)
         {
-            var accessToken = service.GetAccessToken(redirectUri, token);
-
-            return View("Index");
-
+            var accessToken = service.GetAccessToken(redirectUri, code);
+            
             //Session["AccessToken"] = acctoken;
+            
+            return View("Index");
         }
-
 
         public ActionResult Index()
         {
