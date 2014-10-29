@@ -1,13 +1,11 @@
-﻿using System;
+﻿using FourSquare.SharpSquare.Entities;
+using foursquare_places.Models;
 using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
-using foursquare_places.Models;
-using FourSquare.SharpSquare.Entities;
 using System.Threading.Tasks;
-using System.Diagnostics;
+using System.Web.Http;
 
 namespace foursquare_places.Controllers
 {
@@ -15,14 +13,19 @@ namespace foursquare_places.Controllers
     {
         // POST /api/venues
         [HttpPost]
-        public HttpResponseMessage Post([FromBody]foursquare_places.Models.Location location)
+        public HttpResponseMessage Post([FromBody]Models.Location location)
         {
-
-            Debug.WriteLine(location);
             if (!string.IsNullOrEmpty(location.ToString()))
             {
-                var venues = Foursquare.SearchVenues(location.ToString());
-                return Request.CreateResponse<List<Venue>>(HttpStatusCode.OK, venues, "application/json");
+                try
+                {
+                    var venues = Foursquare.SearchVenues(location.ToString());
+                    return Request.CreateResponse<List<Venue>>(HttpStatusCode.OK, venues, "application/json");
+                }
+                catch (WebException webEx)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, "Bad location data");
+                }
             }
             else
             {

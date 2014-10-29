@@ -1,4 +1,5 @@
-﻿using System;
+﻿using foursquare_places.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,7 @@ namespace foursquare_places
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Foursquare.LoadVenueCategories();
         }
     }
 }
