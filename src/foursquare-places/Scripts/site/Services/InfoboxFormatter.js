@@ -20,6 +20,10 @@
         if (venue.url !== null) {
             container.appendChild(linkContainer);
         }
+
+        var checkins = document.createElement('p');
+        checkins.innerHTML = "Checkins count: " + venue.stats.checkinsCount;
+        container.appendChild(checkins);
         
         return container;
 

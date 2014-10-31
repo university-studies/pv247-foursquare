@@ -1,7 +1,7 @@
 ﻿module = angular.module('FoursquareModule');
 
-module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoader', 'InfoboxFormatter',
-                           function ($scope, $element, $window, venuesLoader, InfoboxFormatter) {
+module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoader', 'InfoboxFormatter', 'MarkerFormatter',
+                           function ($scope, $element, $window, venuesLoader, InfoboxFormatter, MarkerFormatter) {
 
     $scope.venues = [];
     $scope.currentPosition = null;
@@ -54,16 +54,7 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
         var infobox;
         newValue.forEach(function (item, i) {
 
-            var latlng = new google.maps.LatLng(item.location.lat, item.location.lng);
-
-            var marker = new google.maps.Marker({
-                map: $scope.map,
-                position: latlng,
-                title: item.name,
-                clickable: true,
-            });
-
-            $scope.markers.push(marker);
+            var marker = MarkerFormatter.markVenue(item, $scope.map, $scope.markers);                       
 
             google.maps.event.addListener(marker, "click", function (e) {
                 if (infobox) {
@@ -94,5 +85,4 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
         venuesLoader.getAll($scope, position);
     }
 
-    function addInfoBox() { }
 }]);
