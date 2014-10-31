@@ -34,9 +34,16 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
             var mapOptions = {
                 zoom: 18,
                 center: centerPosition
-            }
+            }          
 
             $scope.map = new google.maps.Map($element[0], mapOptions);
+
+            var positionMarker = new google.maps.Marker({
+                icon: 'http://google.com/mapfiles/arrow.png',
+                map: $scope.map,
+                position: centerPosition,
+                title: 'You are here!'
+            });
         }
     });
 
