@@ -31,13 +31,15 @@ namespace foursquare_places.Controllers
             return new RedirectResult(url,false);
         }
 
-        public ActionResult AuthorizeCallback(string temp,string code)
+        public ActionResult AuthorizeCallback(string temp, string code)
         {
             var accessToken = service.GetAccessToken(redirectUri, code);
-            
-            //Session["AccessToken"] = acctoken;
-            
-            return View("Index");
+
+            Session["AccessToken"] = accessToken;
+
+            string rUrl = "http://foursquare-places.azurewebsites.net/";
+
+            return new RedirectResult(rUrl, false);
         }
 
         public ActionResult Index()
