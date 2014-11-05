@@ -43,11 +43,56 @@ namespace foursquare_places.Models
                 {
                     foreach (Category category in venue.categories.ToArray())
                     {
-                        var newCategory = GetRootCategory(category);
+                        var newCategory = GetOurRootCategory(GetRootCategory(category));
                         venue.categories.Remove(category);
                         venue.categories.Add(newCategory);
                     }
                 }
+            }
+        }
+
+        private static Category GetOurRootCategory(Category category)
+        {
+            switch (category.id)
+            {
+                case "4d4b7104d754a06370d81259":
+                case "4d4b7105d754a06373d81259":
+                case "4d4b7105d754a06376d81259":
+                    return new Category
+                    {
+                        id = "1",
+                        name = "Arts & Entertainment"
+                    };
+                case "4d4b7105d754a06374d81259":
+                    category.id = "2";
+                    category.name = "Restaurant";
+                    return category;
+                case "4d4b7105d754a06372d81259":
+                case "4d4b7105d754a06375d81259":
+                    return new Category
+                    {
+                        id = "3",
+                        name = "School & Business"
+                    };
+                case "4e67e38e036454776db1fb3a":
+                case "4d4b7105d754a06377d81259":
+                    return new Category
+                    {
+                        id = "4",
+                        name = "Residence & Recreation"
+                    };
+                case "4d4b7105d754a06379d81259":
+                    category.id = "5";
+                    return category;
+                case "4d4b7105d754a06378d81259":
+                    category.id = "6";
+                    return category;
+                default :
+                    return new Category
+                    {
+                        id = "0",
+                        name = "Unknown"
+                    };
             }
         }
 
