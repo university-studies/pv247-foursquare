@@ -3,10 +3,7 @@
 module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoader', 'InfoboxFormatter', 'MarkerFormatter',
                            function ($scope, $element, $window, venuesLoader, InfoboxFormatter, MarkerFormatter) {
 
-    $scope.venues = [];
-    $scope.currentPosition = null;
-    $scope.map = null;
-    $scope.markers = [];
+    $scope.currentPosition = null;   
 
     if ($window.navigator.geolocation) {
         $window.navigator.geolocation.getCurrentPosition(function (position) {
@@ -49,8 +46,9 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
 
 
     $scope.$watch('venues', function (newValue, oldValue) {
+
         console.log($scope.venues);
-        $scope.markers = [];
+        //$scope.venues.length = 10;
         var infobox;
         newValue.forEach(function (item, i) {
 
