@@ -30,9 +30,11 @@
 
             // check for json valid format
             var cat;
-            if (venue.categories[0]) {
+            if (venue.categories.length == 1) {
                 cat = venue.categories[0].name;
-            }       
+            } else {
+                cat = 'Unknown';
+            }
             
             var marker = new google.maps.Marker({
                 icon: markerIcon,
