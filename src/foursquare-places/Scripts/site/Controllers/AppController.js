@@ -6,7 +6,7 @@
         $scope.categories = {};
 
         $scope.markers = [];
-
+        
 
     }]
 )
