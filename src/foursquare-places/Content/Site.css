@@ -75,7 +75,7 @@ textarea {
 
 
 @media (max-width: 9999px) {
-    .navbar-header {
+    /*.navbar-header {
         float: none;
     }
     .navbar-toggle {
@@ -98,7 +98,7 @@ textarea {
     .navbar-nav>li>a {
         padding-top: 10px;
         padding-bottom: 10px;
-    }
+    }*/
 }
 
 @media(max-width: 400px){
