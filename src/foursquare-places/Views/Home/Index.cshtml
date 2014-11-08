@@ -24,7 +24,7 @@
     @Styles.Render("~/Content/css")
 
 </head>
-<body>
+<body ng-controller="AppController">
     <div class="container header-container">
         <div id="header">Foursquare Places</div>
     </div>
@@ -42,7 +42,13 @@
                 </div>
                 <div class="navbar-collapse collapse" collapse="navCollapsed">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("About", "About", "Home")</li>                        
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li><a href="#" ng-click="toggleCategory('Arts & Entertainment')">Fun</a></li>
+                        <li><a href="#" ng-click="toggleCategory('Restaurants')">Food</a></li>
+                        <li><a href="#" ng-click="toggleCategory('School & Business')">Public</a></li>
+                        <li><a href="#" ng-click="toggleCategory('Residence & Recreation')">Pasttime</a></li>
+                        <li><a href="#" ng-click="toggleCategory('Travel & Transport')">Travel</a></li>
+                        <li><a href="#" ng-click="toggleCategory('Shop & Service')">Shop</a></li>                                               
                     </ul>
                 </div>
             </div>

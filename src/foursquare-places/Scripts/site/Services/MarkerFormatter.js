@@ -10,7 +10,7 @@
             size = 38;
         }else if (checkins < 500) {
             size = 46;
-        } else if (checkins < 1000) {
+        } else {
             size = 56;
         }
         return size;
@@ -27,17 +27,38 @@
                      null,
                      new google.maps.Size(size, size)
                 );
+
+            // check for json valid format
+            var cat;
+            if (venue.categories[0]) {
+                cat = venue.categories[0].name;
+            }       
             
             var marker = new google.maps.Marker({
                 icon: markerIcon,
                 map: map,
                 position: latlng,
                 title: venue.name,
-                clickable: true
+                clickable: true,
+                category: cat
             });            
 
             markers.push(marker);
             return marker;
+        }, 
+
+        filterMarkers: function (markers, categories, map) {
+
+            console.log(categories)
+            console.log(markers)
+
+            for (i in markers) {                
+                if (categories[markers[i].category]) {
+                    markers[i].setMap(map);
+                } else {
+                    markers[i].setMap(null);
+                }
+            }
         }
     };
 });
