@@ -42,13 +42,31 @@
                 </div>
                 <div class="navbar-collapse collapse" collapse="navCollapsed">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li><a href="#" ng-click="toggleCategory('Arts & Entertainment')">Fun</a></li>
-                        <li><a href="#" ng-click="toggleCategory('Restaurants')">Food</a></li>
-                        <li><a href="#" ng-click="toggleCategory('School & Business')">Public</a></li>
-                        <li><a href="#" ng-click="toggleCategory('Residence & Recreation')">Pasttime</a></li>
-                        <li><a href="#" ng-click="toggleCategory('Travel & Transport')">Travel</a></li>
-                        <li><a href="#" ng-click="toggleCategory('Shop & Service')">Shop</a></li>                                               
+                     @*   <li>@Html.ActionLink("About", "About", "Home")</li>*@
+                        <li><a href="#"
+                                ng-click="toggleCategory('Arts & Entertainment')"
+                                ng-class="{ 'filter-on' : categories['Arts & Entertainment']}">Fun</a>
+                        </li>
+                        <li><a href="#" 
+                               ng-click="toggleCategory('Restaurants')"
+                               ng-class="{ 'filter-on' : categories['Restaurants']}">Food</a>
+                        </li>
+                        <li><a href="#"
+                               ng-click="toggleCategory('School & Business')"
+                               ng-class="{ 'filter-on' : categories['School & Business']}">Public</a>
+                        </li>
+                        <li><a href="#" 
+                               ng-click="toggleCategory('Residence & Recreation')"
+                               ng-class="{ 'filter-on' : categories['Residence & Recreation']}">Pasttime</a>
+                        </li>
+                        <li><a href="#" 
+                               ng-click="toggleCategory('Travel & Transport')"
+                               ng-class="{ 'filter-on' : categories['Travel & Transport']}">Travel</a>
+                        </li>
+                        <li><a href="#" 
+                               ng-click="toggleCategory('Shop & Service')"
+                               ng-class="{ 'filter-on' : categories['Shop & Service']}">Shop</a>
+                        </li>                                               
                     </ul>
                 </div>
             </div>

@@ -5,8 +5,7 @@
         $scope.venues = [];
         $scope.categories = {};
 
-        $scope.markers = [];
-        
+        $scope.markers = [];      
 
     }]
 )
