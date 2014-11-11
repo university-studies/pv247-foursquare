@@ -14,8 +14,8 @@ namespace foursquare_places.Controllers
 {
     public class HomeController : Controller
     {
-        static string clientId = "T4JTQ1SK5CDOD4HSBA00HIZRTR1H04JP43RXCSIOLE0IDWRK";
-        static string clientSecret = "BSKKMLGAFHZ1VSUL4FL5CP0D31QIGJIZV0WPNII3KQUZQVLG";
+        static string clientId = System.Configuration.ConfigurationManager.AppSettings["FoursquareclientId"];
+        static string clientSecret = System.Configuration.ConfigurationManager.AppSettings["FoursquareclientSecret"];
         //Test url
         //static string redirectUri = "https://localhost:44301/Home/AuthorizeCallback";
         static string redirectUri = "https://foursquare-places.azurewebsites.net/Home/AuthorizeCallback";
@@ -23,10 +23,6 @@ namespace foursquare_places.Controllers
 
         public ActionResult Login()
         {
-
-            //string url = "https://foursquare.com/oauth2/authenticate?client_id=" + clientId + "&response_type=code&redirect_uri=" + redirectUri;
-            //string url = "https://foursquare.com/oauth2/authenticate?display=touch&client_id=" + clientId + "&client_secret=" + clientSecret + "&response_type=token&redirect_uri=" + redirectUri;
-
             string url = service.GetAuthenticateUrl(redirectUri);
             return new RedirectResult(url,false);
         }
