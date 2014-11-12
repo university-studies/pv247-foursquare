@@ -154,7 +154,7 @@ namespace FourSquare.SharpSquare.Core
                 oauthToken = string.Format("oauth_token={0}", accessToken);
             }
 
-            string json = Request(string.Format("{0}{1}?{2}{3}&v={4}", apiUrl, endpoint, oauthToken, serializedParameters,apiVersion), HttpMethod.GET);
+            string json = Request(string.Format("{0}{1}?{2}{3}&v={4}", apiUrl, endpoint, oauthToken, serializedParameters, apiVersion), HttpMethod.GET);
            
             // fix for invalid json format with "confident" property
             if (json.IndexOf(",\"confident") > 0)

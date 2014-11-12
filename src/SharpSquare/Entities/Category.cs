@@ -80,5 +80,10 @@ namespace FourSquare.SharpSquare.Entities
             get;
             set;
         }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }

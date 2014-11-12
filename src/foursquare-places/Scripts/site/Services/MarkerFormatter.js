@@ -9,7 +9,7 @@
                                  'Unknown'];
 
     var determineIconSize = function (venue) {
-        var checkins = venue.stats.checkinsCount,            
+        var checkins = venue.CheckinsCount,            
             size = 20;
 
         if (checkins < 50) {
@@ -26,7 +26,7 @@
 
     var determineIcon = function (venue) {
         var value = 'http://maps.google.com/mapfiles/kml/pal3/icon31.png';        
-        switch (venue.categories[0].name) {
+        switch (venue.Category) {
             case categoriesList[0]:
                 value = 'http://maps.google.com/mapfiles/kml/pal2/icon27.png';
                 break;
@@ -52,17 +52,8 @@
 
     return {
         markVenue: function (venue, map, markers) {
-            // check for json valid format and repair
-            var cat;
-            if (venue.categories.length == 1) {
-                cat = venue.categories[0].name;
-            } else {
-                cat = 'Unknown';                
-                venue.categories = [];
-                venue.categories.unshift({ name: cat });                
-            }
 
-            var latlng = new google.maps.LatLng(venue.location.lat, venue.location.lng),
+            var latlng = new google.maps.LatLng(venue.Location.Latitude, venue.Location.Longitude),
                 size = determineIconSize(venue),
                 image = determineIcon(venue),
                 markerIcon = new google.maps.MarkerImage(
@@ -77,9 +68,9 @@
                 icon: markerIcon,
                 map: map,
                 position: latlng,
-                title: venue.name,
+                title: venue.Name,
                 clickable: true,
-                category: cat
+                category: venue.Category
             });            
 
             markers.push(marker);

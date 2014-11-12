@@ -14,12 +14,13 @@ namespace foursquare_places.Controllers
 {
     public class HomeController : Controller
     {
-        static string clientId = System.Configuration.ConfigurationManager.AppSettings["FoursquareclientId"];
-        static string clientSecret = System.Configuration.ConfigurationManager.AppSettings["FoursquareclientSecret"];
         //Test url
         //static string redirectUri = "https://localhost:44301/Home/AuthorizeCallback";
         static string redirectUri = "https://foursquare-places.azurewebsites.net/Home/AuthorizeCallback";
-        SharpSquare service = new SharpSquare(clientId, clientSecret);
+        
+        private SharpSquare service = new SharpSquare(
+            System.Configuration.ConfigurationManager.AppSettings["FoursquareclientId"],
+            System.Configuration.ConfigurationManager.AppSettings["FoursquareclientSecret"]);
 
         public ActionResult Login()
         {
@@ -33,21 +34,12 @@ namespace foursquare_places.Controllers
 
             Session["AccessToken"] = accessToken;
 
-            string rUrl = "http://foursquare-places.azurewebsites.net/";
-
-            return new RedirectResult(rUrl, false);
+            return new RedirectResult("http://foursquare-places.azurewebsites.net/", false);
         }
 
         public ActionResult Index()
         {
             return View();
         }
-
-
-        /*public ActionResult About()
-        {
-            ViewBag.Message = "About Foursquare places";
-            return View();
-        }*/
     }
 }
