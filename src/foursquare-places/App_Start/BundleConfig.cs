@@ -12,7 +12,8 @@ namespace foursquare_places
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/zocial.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular")
                 .Include("~/Scripts/site/Controllers/*.js")
