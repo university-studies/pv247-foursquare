@@ -4,13 +4,13 @@
         var infobox;
         return {
             filterMarkers: function (markers, categories, map) {
-                for (i in markers) {
-                    if (categories[markers[i].category] && markers[i].map == null) {
-                        markers[i].setMap(map);
-                    } else if (!categories[markers[i].category] && markers[i].map != null) {
-                        markers[i].setMap(null);
+                angular.forEach(markers, function (value, key) {
+                    if (categories[value.category] && value.map == null) {
+                        value.setMap(map);
+                    } else if (!categories[value.category] && value.map != null) {
+                        value.setMap(null);
                     }
-                }
+                });                
             },
 
             addMarkerListener: function (marker, map, item) {
