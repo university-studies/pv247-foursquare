@@ -51,7 +51,7 @@
     };
 
     return {
-        markVenue: function (venue, map, markers) {
+        markVenue: function (venue, map) {
 
             var latlng = new google.maps.LatLng(venue.Location.Latitude, venue.Location.Longitude),
                 size = determineIconSize(venue),
@@ -71,9 +71,7 @@
                 title: venue.Name,
                 clickable: true,
                 category: venue.Category
-            });            
-
-            markers.push(marker);
+            });        
             return marker;
         }, 
 

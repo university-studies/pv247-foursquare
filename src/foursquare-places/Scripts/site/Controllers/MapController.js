@@ -22,7 +22,9 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
 
     $scope.$watch('currentPosition', function(newValue, oldValue) {
         if (newValue) {
-            initVenues(newValue);
+            //venuesLoader.getAll($scope, newValue);
+            venuesLoader.getAllByGet($scope, newValue);
+                
 
             var latitude = newValue.latitude;
             var longitude = newValue.longitude;
@@ -59,6 +61,8 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
                 console.log(marker);
             }*/
 
+            $scope.markers.push(marker);
+
             google.maps.event.addListener(marker, "click", function (e) {
                 if (infobox) {
                     infobox.close();
@@ -83,9 +87,4 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
             });          
         });
     });
-
-    function initVenues(position) {
-        venuesLoader.getAll($scope, position);
-    }
-
 }]);
