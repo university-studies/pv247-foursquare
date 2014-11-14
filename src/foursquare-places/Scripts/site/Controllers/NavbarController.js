@@ -1,6 +1,6 @@
 ﻿angular.module('FoursquareModule').controller('NavbarController', 
-    ['$scope', 'MarkerFormatter',
-        function ($scope, MarkerFormatter) {
+    ['$scope', 'MarkerUtils',
+        function ($scope, MarkerUtils) {
             
 
             $scope.categories = {
@@ -17,7 +17,7 @@
             $scope.toggleCategory = function (category) {
                 $scope.categories[category] = !$scope.categories[category];
                 
-                MarkerFormatter.filterMarkers($scope.markers, $scope.categories, $scope.map);
+                MarkerUtils.filterMarkers($scope.markers, $scope.categories, $scope.map);
             };
 
         

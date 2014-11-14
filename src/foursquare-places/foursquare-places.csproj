@@ -161,6 +161,7 @@
     <Content Include="Scripts\site\foursquare-module.js" />
     <Content Include="Scripts\site\Services\InfoboxFormatter.js" />
     <Content Include="Scripts\site\Services\MarkerFormatter.js" />
+    <Content Include="Scripts\site\Services\MarkerUtils.js" />
     <Content Include="Scripts\site\Services\VenuesLoader.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.11.2.js" />
     <Content Include="Scripts\_references.js" />

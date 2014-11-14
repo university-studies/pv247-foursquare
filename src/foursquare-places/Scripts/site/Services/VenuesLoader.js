@@ -1,4 +1,4 @@
-﻿angular.module('FoursquareModule').factory('venuesLoader',
+﻿angular.module('FoursquareModule').factory('VenuesLoader',
     ['$http', function ($http) {
 
     return {
