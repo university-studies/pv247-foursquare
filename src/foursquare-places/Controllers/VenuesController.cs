@@ -14,33 +14,7 @@ namespace foursquare_places.Controllers
     {
         private FoursquareClient client = new FoursquareClient();
 
-        // POST /api/venues
-        [HttpPost]
-        public HttpResponseMessage Post([FromBody]Models.Location location)
-        {
-            if (!string.IsNullOrEmpty(location.ToString()))
-            {
-                try
-                {
-                    var places = client.SearchPlaces(location);
-                    return Request.CreateResponse<List<FPlace>>(HttpStatusCode.OK, places, "application/json");
-                }
-                catch (WebException webEx)
-                {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Bad location data");
-                }
-                catch (ArgumentNullException ex)
-                {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Bad location data");
-                }
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound, "Empty location");
-            }
-
-        }
-
+        // GET /api/venues
         [HttpGet]
         public HttpResponseMessage Get([FromUri]Models.Location location)
         { 
