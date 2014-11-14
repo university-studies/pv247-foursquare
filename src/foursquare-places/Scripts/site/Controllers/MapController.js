@@ -23,7 +23,7 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
     $scope.$watch('currentPosition', function(newValue, oldValue) {
         if (newValue) {
             //venuesLoader.getAll($scope, newValue);
-            venuesLoader.getAllByGet($scope, newValue);
+            venuesLoader.getAll($scope, newValue);
                 
 
             var latitude = newValue.latitude;

@@ -2,7 +2,7 @@
     ['$http', function ($http) {
 
     return {
-        getAllByGet: function ($scope, position) {
+        getAll: function ($scope, position) {
             var location = {
                 latitude: position.latitude,
                 longitude: position.longitude
@@ -17,6 +17,6 @@
             }).error(function (data, status, headers, config) {
                 alert("Error while loading venues from server!");
             });
-        }
+        },
     };
 }]);
