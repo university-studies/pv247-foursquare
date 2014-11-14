@@ -81,15 +81,9 @@
 
             for (i in markers) {                
                 if (categories[markers[i].category] && markers[i].map == null) {                    
-
                     markers[i].setMap(map);
-                    console.log(markers[i])
-
                 } else if (!categories[markers[i].category] && markers[i].map != null) {
-
                     markers[i].setMap(null);
-                    console.log(markers[i])
-
                 }
             }
         }

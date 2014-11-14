@@ -47,7 +47,7 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
 
     $scope.$watch('venues', function (newValue, oldValue) {
 
-        $scope.venues.length = 15;
+        //$scope.venues.length = 15;
         console.log($scope.venues);
         
         var infobox;
