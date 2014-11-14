@@ -24,10 +24,10 @@
             container.appendChild(linkContainer);
         }
 
-        /*category in infobox for debug */
+        /*category in infobox for debug 
         var cat = document.createElement('p');
         cat.innerHTML = venue.Category
-        container.appendChild(cat);
+        container.appendChild(cat);*/
 
         var checkins = document.createElement('p');
         checkins.innerHTML = "Checkins count: " + venue.CheckinsCount;

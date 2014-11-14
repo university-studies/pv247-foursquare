@@ -5,7 +5,7 @@
 
             $scope.categories = {
                 'Arts & Entertainment': true,
-                'Restaurants': true,
+                'Restaurant': true,
                 'School & Business': true,
                 'Residence & Recreation': true,
                 'Travel & Transport': true,

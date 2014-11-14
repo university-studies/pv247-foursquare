@@ -47,13 +47,17 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
 
     $scope.$watch('venues', function (newValue, oldValue) {
 
-        $scope.venues.length = 10;
+        $scope.venues.length = 15;
         console.log($scope.venues);
         
         var infobox;
         newValue.forEach(function (item, i) {
 
             var marker = MarkerFormatter.markVenue(item, $scope.map, $scope.markers);
+
+            /*if (marker.title == 'Nihao') {
+                console.log(marker);
+            }*/
 
             google.maps.event.addListener(marker, "click", function (e) {
                 if (infobox) {
