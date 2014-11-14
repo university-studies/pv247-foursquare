@@ -47,12 +47,13 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
 
     $scope.$watch('venues', function (newValue, oldValue) {
 
+        $scope.venues.length = 10;
         console.log($scope.venues);
-        //$scope.venues.length = 10;
+        
         var infobox;
         newValue.forEach(function (item, i) {
 
-            var marker = MarkerFormatter.markVenue(item, $scope.map, $scope.markers);                       
+            var marker = MarkerFormatter.markVenue(item, $scope.map, $scope.markers);
 
             google.maps.event.addListener(marker, "click", function (e) {
                 if (infobox) {

@@ -1,7 +1,7 @@
 ﻿angular.module('FoursquareModule').factory('MarkerFormatter', function () {
 
     var categoriesList = ['Arts & Entertainment',
-                                 'Restaurants',
+                                 'Restaurant',
                                  'School & Business',
                                  'Residence & Recreation',
                                  'Travel & Transport',
