@@ -9,7 +9,7 @@ namespace foursquare_places.Models
 {
     public class FoursquareClient
     {
-        private VenueCategoriesManager venueCatManager = new VenueCategoriesManager();
+        private static VenueCategoriesManager venueCatManager = new VenueCategoriesManager();
         private SharpSquare sharpSquare = new SharpSquare(
                 System.Configuration.ConfigurationManager.AppSettings["FoursquareclientId"],
                 System.Configuration.ConfigurationManager.AppSettings["FoursquareclientSecret"]);
