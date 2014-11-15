@@ -13,7 +13,7 @@ namespace foursquare_places.Models
         private SharpSquare sharpSquare = new SharpSquare(
                 System.Configuration.ConfigurationManager.AppSettings["FoursquareclientId"],
                 System.Configuration.ConfigurationManager.AppSettings["FoursquareclientSecret"]);
-
+        
         /// <summary>
         /// Searches for nearest venues based on provided location
         /// </summary>
