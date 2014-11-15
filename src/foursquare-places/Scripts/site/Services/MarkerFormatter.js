@@ -1,7 +1,7 @@
 ﻿angular.module('FoursquareModule').factory('MarkerFormatter', function () {
 
     var categoriesList = ['Arts & Entertainment',
-                                 'Restaurants',
+                                 'Restaurant',
                                  'School & Business',
                                  'Residence & Recreation',
                                  'Travel & Transport',
@@ -49,9 +49,10 @@
         
         return value;
     };
+    
 
     return {
-        markVenue: function (venue, map, markers) {
+        markVenue: function (venue, map) {
 
             var latlng = new google.maps.LatLng(venue.Location.Latitude, venue.Location.Longitude),
                 size = determineIconSize(venue),
@@ -70,23 +71,20 @@
                 position: latlng,
                 title: venue.Name,
                 clickable: true,
-                category: venue.Category
-            });            
-
-            markers.push(marker);
+                category: venue.Category,
+                id: venue.Id
+            });        
             return marker;
-        }, 
+        },
 
-        filterMarkers: function (markers, categories, map) {
-
-            for (i in markers) {                
-                if (categories[markers[i].category] && markers[i].map == null) {                    
-                        markers[i].setMap(map);                                       
-                } else if (!categories[markers[i].category] && markers[i].map != null) {
-                    markers[i].setMap(null);
-                }
-            }
-        }
+        markPosition: function (map, centerPosition) {
+            new google.maps.Marker({
+                icon: 'http://google.com/mapfiles/arrow.png',
+                map: map,
+                position: centerPosition,
+                title: 'You are here!'
+            });
+        },
     };
 });
 

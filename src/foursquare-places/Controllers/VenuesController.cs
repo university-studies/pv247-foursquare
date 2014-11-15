@@ -14,11 +14,11 @@ namespace foursquare_places.Controllers
     {
         private FoursquareClient client = new FoursquareClient();
 
-        // POST /api/venues
-        [HttpPost]
-        public HttpResponseMessage Post([FromBody]Models.Location location)
-        {
-            if (!string.IsNullOrEmpty(location.ToString()))
+        // GET /api/venues
+        [HttpGet]
+        public HttpResponseMessage Get([FromUri]Models.Location location)
+        { 
+            if(!string.IsNullOrEmpty(location.ToString()))
             {
                 try
                 {
@@ -38,7 +38,6 @@ namespace foursquare_places.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, "Empty location");
             }
-
         }
     }
 }

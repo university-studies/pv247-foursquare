@@ -1,9 +1,11 @@
 ﻿module = angular.module('FoursquareModule');
 
-module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoader', 'InfoboxFormatter', 'MarkerFormatter',
-                           function ($scope, $element, $window, venuesLoader, InfoboxFormatter, MarkerFormatter) {
+module.controller('MapController', ['$scope', '$element', '$window', 'VenuesLoader', 'MarkerFormatter', 'MarkerUtils',
+                           function ($scope, $element, $window, VenuesLoader, MarkerFormatter, MarkerUtils) {
 
-    $scope.currentPosition = null;   
+    $scope.currentPosition = null;
+    $scope.mapCenter = null;
+    var init = true;
 
     if ($window.navigator.geolocation) {
         $window.navigator.geolocation.getCurrentPosition(function (position) {
@@ -12,75 +14,77 @@ module.controller('MapController', ['$scope', '$element', '$window', 'venuesLoad
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude
                 };
+                $scope.mapCenter = $scope.currentPosition;
             });
         });
     } else {
         // TODO - show some location or ERROR
-    }
+    }     
 
-     
-
-    $scope.$watch('currentPosition', function(newValue, oldValue) {
+    $scope.$watch('mapCenter', function(newValue, oldValue) {
         if (newValue) {
-            initVenues(newValue);
+            
+            VenuesLoader.getAll($scope, newValue);
 
-            var latitude = newValue.latitude;
-            var longitude = newValue.longitude;
+            var latitude = newValue.latitude,
+                longitude = newValue.longitude,
+                maxZoom = 16;
+                centerPosition = new google.maps.LatLng(latitude, longitude),
+                mapOptions = {
+                    zoom: 18,
+                    center: centerPosition
+                };
+            
+            if (init) {
+                init = false;
 
-            var centerPosition = new google.maps.LatLng(latitude, longitude);
-            var mapOptions = {
-                zoom: 18,
-                center: centerPosition
-            }          
+                $scope.map = new google.maps.Map($element[0], mapOptions);
 
-            $scope.map = new google.maps.Map($element[0], mapOptions);
+                MarkerFormatter.markPosition($scope.map, centerPosition);
 
-            var positionMarker = new google.maps.Marker({
-                icon: 'http://google.com/mapfiles/arrow.png',
-                map: $scope.map,
-                position: centerPosition,
-                title: 'You are here!'
-            });
+                google.maps.event.addListener($scope.map, 'center_changed', function () {
+                    var newCenter = $scope.map.getCenter(),
+                        oldCenter = $scope.mapCenter,
+                        distance = Math.sqrt(Math.pow(newCenter.k - oldCenter.latitude, 2) + Math.pow(newCenter.B - oldCenter.longitude, 2));
+
+                    if (distance > 0.0015) {
+                        $scope.$apply(function () {
+                            $scope.mapCenter = { latitude: newCenter.k, longitude: newCenter.B };
+                        });
+                    }
+                });
+
+                google.maps.event.addListener($scope.map, 'zoom_changed', function () {
+                    if ($scope.map.getZoom() < maxZoom) {
+                        $scope.map.setZoom(maxZoom);
+                    } 
+                });
+
+
+            }            
+
+            
         }
     });
 
-
     $scope.$watch('venues', function (newValue, oldValue) {
 
-        console.log($scope.venues);
-        //$scope.venues.length = 10;
-        var infobox;
+        //$scope.venues.length = 15;
+        //console.log($scope.venues);        
+        
         newValue.forEach(function (item, i) {
 
-            var marker = MarkerFormatter.markVenue(item, $scope.map, $scope.markers);                       
+            var marker,
+                isNotDuplicateItem = MarkerUtils.findDuplicate(item, $scope.markers);
 
-            google.maps.event.addListener(marker, "click", function (e) {
-                if (infobox) {
-                    infobox.close();
-                }
-                InfoboxFormatter.addElement(item);
-                infobox = new InfoBox({
-                    content: document.getElementById("infobox"),
-                    disableAutoPan: false,
-                    maxWidth: 150,
-                    pixelOffset: new google.maps.Size(-140, 0),
-                    zIndex: null,
-                    boxStyle: {
-                        background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
-                        opacity: 0.75,
-                        width: "280px"
-                    },
-                    closeBoxMargin: "12px 4px 2px 2px",
-                    closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
-                    infoBoxClearance: new google.maps.Size(1, 1)
-                });
-                infobox.open($scope.map, this);
-            });          
+            if (isNotDuplicateItem) {
+                marker = MarkerFormatter.markVenue(item, $scope.map, $scope.markers);
+
+                $scope.markers.push(marker);
+
+                MarkerUtils.addMarkerListener(marker, $scope.map, item);
+            }           
         });
+        
     });
-
-    function initVenues(position) {
-        venuesLoader.getAll($scope, position);
-    }
-
 }]);
