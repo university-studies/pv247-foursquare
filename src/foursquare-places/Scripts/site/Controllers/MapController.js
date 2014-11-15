@@ -4,8 +4,7 @@ module.controller('MapController', ['$scope', '$element', '$window', 'VenuesLoad
                            function ($scope, $element, $window, VenuesLoader, MarkerFormatter, MarkerUtils) {
 
     $scope.currentPosition = null;
-    $scope.mapCenter = null;
-    var init = true;
+    $scope.mapCenter = null;    
 
     if ($window.navigator.geolocation) {
         $window.navigator.geolocation.getCurrentPosition(function (position) {
@@ -35,8 +34,7 @@ module.controller('MapController', ['$scope', '$element', '$window', 'VenuesLoad
                     center: centerPosition
                 };
             
-            if (init) {
-                init = false;
+            if (!$scope.map) {                
 
                 $scope.map = new google.maps.Map($element[0], mapOptions);
 
@@ -59,11 +57,7 @@ module.controller('MapController', ['$scope', '$element', '$window', 'VenuesLoad
                         $scope.map.setZoom(maxZoom);
                     } 
                 });
-
-
-            }            
-
-            
+            }          
         }
     });
 
