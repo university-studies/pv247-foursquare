@@ -49,6 +49,7 @@
         
         return value;
     };
+    
 
     return {
         markVenue: function (venue, map) {
@@ -70,7 +71,8 @@
                 position: latlng,
                 title: venue.Name,
                 clickable: true,
-                category: venue.Category
+                category: venue.Category,
+                id: venue.Id
             });        
             return marker;
         },

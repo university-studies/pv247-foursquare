@@ -37,5 +37,33 @@
                     infobox.open(map, this);
                 });
             },
+
+             findDuplicate: function (venue, markers) {
+                var duplicate = false;
+
+                if (markers.length > 0) {
+
+                    for (var i = 0; i < markers.length; i++) {
+                        if (markers[i].id === venue.Id) {
+                            duplicate = true;
+                            break;
+                        }
+                    }
+                    /* native 'for' seems to perform better in Chrome 38
+                    angular.forEach(markers, function (value, key) {
+                        console.log(value)
+                        if (venue.Id === value.id) {
+                            duplicate = true;
+                            return false;
+                        }
+                    });*/
+                }
+
+                if (!duplicate) {
+                    return venue;
+                } else {
+                    return null;
+                }
+            },
         }
 }]);
