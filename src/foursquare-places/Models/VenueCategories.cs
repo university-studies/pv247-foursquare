@@ -12,8 +12,8 @@ namespace foursquare_places.Models
         private List<Category> VenueCategories;
         private Dictionary<Category, Category> RootCategoryMappings;
         private SharpSquare sharpSquare = new SharpSquare(
-            System.Configuration.ConfigurationManager.AppSettings["FoursquareclientId"],
-            System.Configuration.ConfigurationManager.AppSettings["FoursquareclientSecret"]);
+            System.Configuration.ConfigurationManager.AppSettings["ClientId"],
+            System.Configuration.ConfigurationManager.AppSettings["ClientSecret"]);
 
         /// <summary>
         /// Gets string represetation one of our 7 modified categories based on provided list of categories
