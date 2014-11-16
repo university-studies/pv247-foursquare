@@ -42,7 +42,6 @@
                 var duplicate = false;
 
                 if (markers.length > 0) {
-
                     for (var i = 0; i < markers.length; i++) {
                         if (markers[i].id === venue.Id) {
                             duplicate = true;
@@ -58,7 +57,6 @@
                         }
                     });*/
                 }
-
                 if (!duplicate) {
                     return venue;
                 } else {

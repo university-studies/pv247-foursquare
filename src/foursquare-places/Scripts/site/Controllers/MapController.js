@@ -63,7 +63,7 @@ module.controller('MapController', ['$scope', '$element', '$window', 'VenuesLoad
 
     $scope.$watch('venues', function (newValue, oldValue) {
 
-        //$scope.venues.length = 15;
+        //$scope.venues.length = 5;
         //console.log($scope.venues);        
         
         newValue.forEach(function (item, i) {
@@ -72,7 +72,7 @@ module.controller('MapController', ['$scope', '$element', '$window', 'VenuesLoad
                 isNotDuplicateItem = MarkerUtils.findDuplicate(item, $scope.markers);
 
             if (isNotDuplicateItem) {
-                marker = MarkerFormatter.markVenue(item, $scope.map, $scope.markers);
+                marker = MarkerFormatter.markVenue(item, $scope.map, $scope.categories);
 
                 $scope.markers.push(marker);
 

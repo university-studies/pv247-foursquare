@@ -11,7 +11,6 @@
     var determineIconSize = function (venue) {
         var checkins = venue.CheckinsCount,            
             size = 20;
-
         if (checkins < 50) {
             size = 20;
         }else if (checkins < 100) {
@@ -49,14 +48,27 @@
         
         return value;
     };
+
+    var setMapForNewMarker = function (venue, map, categories) {
+        for (var category in categories) {
+            if (venue.Category === category) {
+                if (categories[category]) {
+                    return map;
+                }
+                break;
+            }
+        }
+        return null;
+    };
     
 
     return {
-        markVenue: function (venue, map) {
+        markVenue: function (venue, map, categories) {
 
             var latlng = new google.maps.LatLng(venue.Location.Latitude, venue.Location.Longitude),
                 size = determineIconSize(venue),
                 image = determineIcon(venue),
+                mapToSet = setMapForNewMarker(venue, map, categories),
                 markerIcon = new google.maps.MarkerImage(
                     image,
                      null,
@@ -67,7 +79,7 @@
             
             var marker = new google.maps.Marker({
                 icon: markerIcon,
-                map: map,
+                map: mapToSet,
                 position: latlng,
                 title: venue.Name,
                 clickable: true,
