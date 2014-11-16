@@ -1,26 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using FourSquare.SharpSquare.Core;
+using System.Configuration;
 using System.Web.Mvc;
-using foursquare_places.Models;
-using FourSquare.SharpSquare.Core;
-using FourSquare.SharpSquare.Entities;
-using System.Web.UI.WebControls;
-using System.Diagnostics;
-using System.Net;
 
 namespace foursquare_places.Controllers
 {
     public class HomeController : Controller
     {
-        //Test url
-        //static string redirectUri = "https://localhost:44301/Home/AuthorizeCallback";
-        static string redirectUri = "https://foursquare-places.azurewebsites.net/Home/AuthorizeCallback";
+        private const string BASE_URL = "https://foursquare-places.azurewebsites.net/";
+
+        private static string redirectUri = BASE_URL + "Home/AuthorizeCallback";
         
         private SharpSquare service = new SharpSquare(
-            System.Configuration.ConfigurationManager.AppSettings["FoursquareclientId"],
-            System.Configuration.ConfigurationManager.AppSettings["FoursquareclientSecret"]);
+            ConfigurationManager.AppSettings["ClientId"],
+            ConfigurationManager.AppSettings["ClientSecret"]);
 
         public ActionResult Login()
         {
@@ -31,10 +23,11 @@ namespace foursquare_places.Controllers
         public ActionResult AuthorizeCallback(string temp, string code)
         {
             var accessToken = service.GetAccessToken(redirectUri, code);
+            
+            //Session["AccessToken"] = accessToken;
+            ConfigurationManager.AppSettings["AccessToken"] = accessToken;
 
-            Session["AccessToken"] = accessToken;
-
-            return new RedirectResult("http://foursquare-places.azurewebsites.net/", false);
+            return new RedirectResult(BASE_URL, false);
         }
 
         public ActionResult Index()

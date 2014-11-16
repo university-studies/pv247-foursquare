@@ -1,19 +1,16 @@
 ﻿using FourSquare.SharpSquare.Core;
 using FourSquare.SharpSquare.Entities;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Configuration;
 
 namespace foursquare_places.Models
 {
     public class FoursquareClient
     {
-        private VenueCategoriesManager venueCatManager = new VenueCategoriesManager();
-        private SharpSquare sharpSquare = new SharpSquare(
-                System.Configuration.ConfigurationManager.AppSettings["FoursquareclientId"],
-                System.Configuration.ConfigurationManager.AppSettings["FoursquareclientSecret"]);
-
+        private static VenueCategoriesManager venueCatManager = new VenueCategoriesManager();
+        private SharpSquare sharpSquare;
+        
         /// <summary>
         /// Searches for nearest venues based on provided location
         /// </summary>
@@ -24,6 +21,16 @@ namespace foursquare_places.Models
             if (location == null)
                 throw new ArgumentNullException("location");
 
+            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["AccessToken"]))
+                sharpSquare = new SharpSquare(
+                ConfigurationManager.AppSettings["ClientId"],
+                ConfigurationManager.AppSettings["ClientSecret"],
+                ConfigurationManager.AppSettings["AccessToken"]);
+            else
+                sharpSquare = new SharpSquare(
+                ConfigurationManager.AppSettings["ClientId"],
+                ConfigurationManager.AppSettings["ClientSecret"]);
+
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("ll", location.ToString());
             parameters.Add("limit", "50");
@@ -31,6 +38,23 @@ namespace foursquare_places.Models
 
             var venues = sharpSquare.SearchVenues(parameters);
             return TransformToFPlaces(venues);
+        }
+
+        /// <summary>
+        /// Gets current authenticated user on Foursquare
+        /// </summary>
+        /// <returns>current User</returns>
+        public User GetAuthenticatedUser()
+        {
+            if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["AccessToken"]))
+                throw new InvalidOperationException("No user is logged in.");
+
+            sharpSquare = new SharpSquare(
+                ConfigurationManager.AppSettings["ClientId"],
+                ConfigurationManager.AppSettings["ClientSecret"],
+                ConfigurationManager.AppSettings["AccessToken"]);
+
+            return sharpSquare.GetUser("self");
         }
 
         private List<FPlace> TransformToFPlaces(List<Venue> venues)
