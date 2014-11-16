@@ -19,10 +19,9 @@
         link.innerHTML = "Homepage";
         link.setAttribute('href', venue.Url);
         linkContainer.appendChild(link);
-
-        if (venue.url !== null) {
+        if (venue.Url) {            
             container.appendChild(linkContainer);
-        }
+        }        
 
         /*category in infobox for debug 
         var cat = document.createElement('p');
