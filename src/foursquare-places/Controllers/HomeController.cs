@@ -27,7 +27,7 @@ namespace foursquare_places.Controllers
             //Session["AccessToken"] = accessToken;
             ConfigurationManager.AppSettings["AccessToken"] = accessToken;
 
-            return new RedirectResult("https://foursquare-places.azurewebsites.net/", false);
+            return new RedirectResult("http://foursquare-places.azurewebsites.net/", false);
         }
 
         public ActionResult Index()
