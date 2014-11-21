@@ -39,14 +39,14 @@ module.controller('MapController', ['$scope', '$element', '$window', 'VenuesLoad
     $scope.$watch('mapCenter', function(newValue, oldValue) {
         if (newValue) {
             
-            VenuesLoader.getAll($scope, newValue);
-
-            var latitude = newValue.latitude,
-                longitude = newValue.longitude,
-                maxZoom = 16;
-                centerPosition = new google.maps.LatLng(latitude, longitude);
+            VenuesLoader.getAll($scope, newValue);           
             
             if (!$scope.map.initialized) {
+                var latitude = newValue.latitude,
+                    longitude = newValue.longitude,
+                    maxZoom = 16;
+                    centerPosition = new google.maps.LatLng(latitude, longitude);
+
                 $scope.map.initialized = true;
                 $scope.map.setZoom(18);
                 $scope.map.setCenter(centerPosition);
