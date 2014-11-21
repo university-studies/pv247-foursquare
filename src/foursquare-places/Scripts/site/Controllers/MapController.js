@@ -4,20 +4,36 @@ module.controller('MapController', ['$scope', '$element', '$window', 'VenuesLoad
                            function ($scope, $element, $window, VenuesLoader, MarkerFormatter, MarkerUtils) {
 
     $scope.currentPosition = null;
-    $scope.mapCenter = null;    
+    $scope.mapCenter = null;
+
+    mapOptions = {
+        zoom: 3,
+        center: new google.maps.LatLng(46.545080, -23.830474)
+    };
+
+    $scope.map = new google.maps.Map($element[0], mapOptions);
+    $scope.map.initialized = false;
+
+    var geoSucc = function (position) {
+        $scope.$apply(function () {
+            $scope.currentPosition = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            };
+            $scope.mapCenter = $scope.currentPosition;
+        });
+    };
+
+    var geoErr = function () {
+        alert("You have to allow geolocation for this app to work properly.");
+    }
+
 
     if ($window.navigator.geolocation) {
-        $window.navigator.geolocation.getCurrentPosition(function (position) {
-            $scope.$apply(function () {
-                $scope.currentPosition = {
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
-                };
-                $scope.mapCenter = $scope.currentPosition;
-            });
-        });
+        $window.navigator.geolocation.getCurrentPosition(geoSucc, geoErr);
+        
     } else {
-        // TODO - show some location or ERROR
+        alert("Geolocation failed. Check your Internet connection.");
     }     
 
     $scope.$watch('mapCenter', function(newValue, oldValue) {
@@ -28,15 +44,12 @@ module.controller('MapController', ['$scope', '$element', '$window', 'VenuesLoad
             var latitude = newValue.latitude,
                 longitude = newValue.longitude,
                 maxZoom = 16;
-                centerPosition = new google.maps.LatLng(latitude, longitude),
-                mapOptions = {
-                    zoom: 18,
-                    center: centerPosition
-                };
+                centerPosition = new google.maps.LatLng(latitude, longitude);
             
-            if (!$scope.map) {                
-
-                $scope.map = new google.maps.Map($element[0], mapOptions);
+            if (!$scope.map.initialized) {
+                $scope.map.initialized = true;
+                $scope.map.setZoom(18);
+                $scope.map.setCenter(centerPosition);
 
                 MarkerFormatter.markPosition($scope.map, centerPosition);
 
