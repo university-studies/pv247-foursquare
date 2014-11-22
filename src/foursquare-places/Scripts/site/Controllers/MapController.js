@@ -86,7 +86,7 @@ module.controller('MapController', ['$scope', '$element', '$window', 'VenuesLoad
 
             if (isNotDuplicateItem) {
                 marker = MarkerFormatter.markVenue(item, $scope.map, $scope.categories);
-
+                console.log(marker)
                 $scope.markers.push(marker);
 
                 MarkerUtils.addMarkerListener(marker, $scope.map, item);

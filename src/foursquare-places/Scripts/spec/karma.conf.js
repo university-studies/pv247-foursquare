@@ -21,6 +21,11 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         './CanarySpec.js',
+        '../angular.js',
+        '../angular-mocks.js',
+        '../site/foursquare-module.js',
+        './MarkerFormatterSpec.js',
+        '../site/Services/MarkerFormatter.js',
     ],
 
 

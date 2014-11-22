@@ -146,6 +146,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\foursquare-places.pubxml" />
@@ -178,6 +179,7 @@
     <Content Include="Scripts\site\Services\VenuesLoader.js" />
     <Content Include="Scripts\spec\CanarySpec.js" />
     <Content Include="Scripts\spec\karma.conf.js" />
+    <Content Include="Scripts\spec\MarkerFormatterSpec.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.11.2.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
