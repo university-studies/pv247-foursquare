@@ -16,6 +16,7 @@ namespace foursquare_places.Models
         public List<string> FormattedAddress { get; set; }
         public string Phone { get; set; }
         public string Category { get; set; }
+        public List<string> FriendsHere { get; set; }
         public long CheckinsCount { get; set; }
         public long HereNow { get; set; }
         public string Url { get; set; }
@@ -31,6 +32,7 @@ namespace foursquare_places.Models
             FormattedAddress = new List<string>();
             Phone = string.Empty;
             Category = string.Empty;
+            FriendsHere = new List<string>();
             CheckinsCount = 0;
             HereNow = 0;
             Url = string.Empty; ;

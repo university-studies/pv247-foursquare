@@ -30,9 +30,13 @@ namespace foursquare_places.Controllers
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "Bad location data");
                 }
-                catch (ArgumentNullException ex)
+                catch (ArgumentNullException anEx)
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "Bad location data");
+                }
+                catch (Exception ex)
+                {
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, "An error occured on server");
                 }
             }
             else
