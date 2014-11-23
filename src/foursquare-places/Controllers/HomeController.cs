@@ -6,28 +6,25 @@ namespace foursquare_places.Controllers
 {
     public class HomeController : Controller
     {
-        private const string BASE_URL = "https://foursquare-places.azurewebsites.net/";
-
-        private static string redirectUri = BASE_URL + "Home/AuthorizeCallback";
+        private const string BASE_URL_SECURE = "https://foursquare-places.azurewebsites.net/";
+        private const string BASE_URL = "http://foursquare-places.azurewebsites.net/";
+        private const string REDIRECT_URL = BASE_URL_SECURE + "Home/AuthorizeCallback";
         
-        private SharpSquare service = new SharpSquare(
+        private SharpSquare sharpSquare = new SharpSquare(
             ConfigurationManager.AppSettings["ClientId"],
             ConfigurationManager.AppSettings["ClientSecret"]);
 
         public ActionResult Login()
         {
-            string url = service.GetAuthenticateUrl(redirectUri);
-            return new RedirectResult(url,false);
+            return new RedirectResult(sharpSquare.GetAuthenticateUrl(REDIRECT_URL), false);
         }
 
         public ActionResult AuthorizeCallback(string temp, string code)
         {
-            var accessToken = service.GetAccessToken(redirectUri, code);
-            
-            //Session["AccessToken"] = accessToken;
-            ConfigurationManager.AppSettings["AccessToken"] = accessToken;
+            Session["AccessToken"] = sharpSquare.GetAccessToken(REDIRECT_URL, code);
+            //ConfigurationManager.AppSettings["AccessToken"] = accessToken;
 
-            return new RedirectResult("http://foursquare-places.azurewebsites.net/", false);
+            return new RedirectResult(BASE_URL, false);
         }
 
         public ActionResult Index()

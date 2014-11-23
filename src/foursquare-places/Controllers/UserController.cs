@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using FourSquare.SharpSquare.Entities;
+using System.Web;
 
 namespace foursquare_places.Controllers
 {
@@ -19,7 +20,7 @@ namespace foursquare_places.Controllers
         {
             try
             {
-                User user = client.GetAuthenticatedUser();
+                User user = client.GetAuthenticatedUser(HttpContext.Current.Session["AccessToken"] as string);
                 return Request.CreateResponse<User>(HttpStatusCode.OK, user, "application/json");
             }
             catch (WebException webEx)

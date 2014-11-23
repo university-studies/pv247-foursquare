@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace foursquare_places.Controllers
@@ -22,7 +23,7 @@ namespace foursquare_places.Controllers
             {
                 try
                 {
-                    var places = client.SearchPlaces(location);
+                    var places = client.SearchPlaces(location, HttpContext.Current.Session["AccessToken"] as string);
                     return Request.CreateResponse<List<FPlace>>(HttpStatusCode.OK, places, "application/json");
                 }
                 catch (WebException webEx)

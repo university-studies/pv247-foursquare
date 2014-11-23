@@ -16,16 +16,16 @@ namespace foursquare_places.Models
         /// </summary>
         /// <param name="location">location where to search for venues</param>
         /// <returns>List of nearest places</returns>
-        public List<FPlace> SearchPlaces(Models.Location location)
+        public List<FPlace> SearchPlaces(Models.Location location, string accessToken)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
 
-            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["AccessToken"]))
+            if (!string.IsNullOrEmpty(accessToken))
                 sharpSquare = new SharpSquare(
                 ConfigurationManager.AppSettings["ClientId"],
                 ConfigurationManager.AppSettings["ClientSecret"],
-                ConfigurationManager.AppSettings["AccessToken"]);
+                accessToken);
             else
                 sharpSquare = new SharpSquare(
                 ConfigurationManager.AppSettings["ClientId"],
@@ -44,15 +44,15 @@ namespace foursquare_places.Models
         /// Gets current authenticated user on Foursquare
         /// </summary>
         /// <returns>current User</returns>
-        public User GetAuthenticatedUser()
+        public User GetAuthenticatedUser(string accessToken)
         {
-            if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["AccessToken"]))
+            if (string.IsNullOrEmpty(accessToken))
                 throw new InvalidOperationException("No user is logged in.");
 
             sharpSquare = new SharpSquare(
                 ConfigurationManager.AppSettings["ClientId"],
                 ConfigurationManager.AppSettings["ClientSecret"],
-                ConfigurationManager.AppSettings["AccessToken"]);
+                accessToken);
 
             return sharpSquare.GetUser("self");
         }

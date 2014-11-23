@@ -12,7 +12,7 @@ namespace foursquare_places
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}",
-                defaults: new { controller = "Venues" }
+                defaults: null
             );
         }
     }
