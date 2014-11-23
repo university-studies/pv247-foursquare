@@ -21,8 +21,7 @@ namespace foursquare_places.Controllers
 
         public ActionResult AuthorizeCallback(string temp, string code)
         {
-            Session["AccessToken"] = sharpSquare.GetAccessToken(REDIRECT_URL, code);
-            //ConfigurationManager.AppSettings["AccessToken"] = accessToken;
+            HttpContext.Session["AccessToken"] = sharpSquare.GetAccessToken(REDIRECT_URL, code);
 
             return new RedirectResult(BASE_URL, false);
         }
