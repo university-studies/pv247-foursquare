@@ -28,6 +28,9 @@ module.exports = function(config) {
         '../site/foursquare-module.js',
         './MarkerFormatterSpec.js',
         '../site/Services/MarkerFormatter.js',
+        './MarkerUtilsSpec.js',
+        '../site/Services/MarkerUtils.js',
+        '../site/Services/InfoboxFormatter.js'
     ],
 
 

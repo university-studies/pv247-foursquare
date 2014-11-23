@@ -1,7 +1,7 @@
 ﻿angular.module('FoursquareModule').factory('MarkerUtils',
     ['InfoboxFormatter', function (InfoboxFormatter) {
 
-        var infobox;
+        
         return {
             filterMarkers: function (markers, categories, map) {
                 angular.forEach(markers, function (value, key) {
@@ -15,9 +15,7 @@
 
             addMarkerListener: function (marker, map, item) {
                 google.maps.event.addListener(marker, "click", function (e) {
-                    if (infobox) {
-                        infobox.close();
-                    }
+                    
                     InfoboxFormatter.addElement(item);
                     infobox = new InfoBox({
                         content: document.getElementById("infobox"),
