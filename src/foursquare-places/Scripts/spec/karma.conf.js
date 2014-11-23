@@ -19,8 +19,7 @@ module.exports = function(config) {
 
 
     // list of files / patterns to load in the browser
-    files: [
-        './CanarySpec.js',
+    files: [        
         '../angular.js',
         '../angular-mocks.js',
         '../angular-resource.js',
