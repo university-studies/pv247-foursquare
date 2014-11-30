@@ -1,7 +1,8 @@
-﻿angular.module('FoursquareModule').factory('MarkerUtils',
-    ['InfoboxFormatter', function (InfoboxFormatter) {
+﻿define(["foursquare-module", "Services/InfoboxFormatter"], function (app, formatter) {
 
-        
+
+    var injectParams = ["InfoboxFormatter"];
+    var MarkerUtils = function (InfoboxFormatter) {
         return {
             filterMarkers: function (markers, categories, map) {
                 angular.forEach(markers, function (value, key) {
@@ -10,12 +11,12 @@
                     } else if (!categories[value.category] && value.map != null) {
                         value.setMap(null);
                     }
-                });                
+                });
             },
 
             addMarkerListener: function (marker, map, item) {
                 google.maps.event.addListener(marker, "click", function (e) {
-                    
+
                     InfoboxFormatter.addElement(item);
                     infobox = new InfoBox({
                         content: document.getElementById("infobox"),
@@ -36,7 +37,7 @@
                 });
             },
 
-             findDuplicate: function (venue, markers) {
+            findDuplicate: function (venue, markers) {
                 var duplicate = false;
 
                 if (markers.length > 0) {
@@ -62,4 +63,8 @@
                 }
             },
         }
-}]);
+    }
+
+    MarkerUtils.$inject = injectParams;
+    app.factory("MarkerUtils", MarkerUtils);
+});

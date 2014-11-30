@@ -176,6 +176,7 @@
     <Content Include="Scripts\site\Controllers\MapController.js" />
     <Content Include="Scripts\site\Controllers\NavbarController.js" />
     <Content Include="Scripts\site\foursquare-module.js" />
+    <Content Include="Scripts\site\main.js" />
     <Content Include="Scripts\site\Services\InfoboxFormatter.js" />
     <Content Include="Scripts\site\Services\MarkerFormatter.js" />
     <Content Include="Scripts\site\Services\MarkerUtils.js" />
