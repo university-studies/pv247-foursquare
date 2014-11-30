@@ -93,4 +93,6 @@ textarea {
     }
 }
 
-
+#loginButton > a{
+    background-color: transparent;
+}

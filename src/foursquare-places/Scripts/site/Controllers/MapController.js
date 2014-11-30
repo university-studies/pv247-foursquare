@@ -1,4 +1,4 @@
-﻿define(["foursquare-module", "Services/MarkerFormatter", "Services/MarkerFormatter"], function (app) {
+﻿define(["foursquare-module", "Services/MarkerFormatter", "Services/MarkerFormatter", "Services/VenuesLoader"], function (app) {
     
     var injectParams = ['$scope', '$element', '$window', 'VenuesLoader', 'MarkerFormatter', 'MarkerUtils'];
     var MapController = function ($scope, $element, $window, VenuesLoader, MarkerFormatter, MarkerUtils) {
