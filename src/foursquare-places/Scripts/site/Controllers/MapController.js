@@ -3,10 +3,27 @@
     var injectParams = ['$scope', '$element', '$window', 'VenuesLoader', 'MarkerFormatter', 'MarkerUtils'];
     var MapController = function ($scope, $element, $window, VenuesLoader, MarkerFormatter, MarkerUtils) {
 
+        var infoBoxOptions = {
+            content: "",
+            disableAutoPan: false,
+            maxWidth: 150,
+            pixelOffset: new google.maps.Size(-140, 0),
+            zIndex: null,
+            boxStyle: {
+                background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
+                opacity: 0.75,
+                width: "280px"
+            },
+            closeBoxMargin: "12px 4px 2px 2px",
+            closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
+            infoBoxClearance: new google.maps.Size(1, 1)
+        };
+
         $scope.currentPosition = null;
         $scope.mapCenter = null;
+        $scope.infoBox = new InfoBox(infoBoxOptions);
 
-        mapOptions = {
+        var mapOptions = {
             zoom: 3,
             center: new google.maps.LatLng(46.545080, -23.830474)
         };
@@ -31,7 +48,6 @@
 
         if ($window.navigator.geolocation) {
             $window.navigator.geolocation.getCurrentPosition(geoSucc, geoErr);
-
         } else {
             alert("Geolocation failed. Check your Internet connection.");
         }
@@ -76,9 +92,6 @@
 
         $scope.$watch('venues', function (newValue, oldValue) {
 
-            //$scope.venues.length = 5;
-            //console.log($scope.venues);        
-
             newValue.forEach(function (item, i) {
 
                 var marker,
@@ -86,10 +99,9 @@
 
                 if (isNotDuplicateItem) {
                     marker = MarkerFormatter.markVenue(item, $scope.map, $scope.categories);
-                    console.log(marker)
                     $scope.markers.push(marker);
 
-                    MarkerUtils.addMarkerListener(marker, $scope.map, item);
+                    MarkerUtils.addMarkerListener(marker, $scope, item);
                 }
             });
 
