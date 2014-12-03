@@ -38,6 +38,10 @@ textarea {
     font-size: 27px;    
     padding: 1% 1%;
 }
+    #header a {
+        text-decoration: none;
+        color: black;
+    }
 
 .header-container {
     padding-bottom: 2%;
@@ -73,18 +77,18 @@ textarea {
     box-shadow: 0 0 8px #000;
 }
 
-.navbar-inverse .navbar-nav > li > a {
-  color: #5A5A5A;
-}
 
-.navbar-inverse .navbar-nav > li > a.filter-on {
-    color: #FF9938;
+.navbar-inverse .navbar-nav > li > a.filter-on{ 
+    background-color: #39393D;
 }
-
-.navbar-inverse .navbar-nav > li > a.filter-on:hover,
-.navbar-inverse .navbar-nav > li > a.filter-on:focus {
-  color: #ffffff;
-  background-color: transparent;
+.navbar-inverse .navbar-nav li > a { 
+    transition-property: all;
+    transition-duration: 0.4s
+}
+ul.filters > li > a,
+ul.filters > li > a:focus,
+ul.filters > li > a:hover {
+    color: #999999 !important;
 }
 
 @media(max-width: 400px){
