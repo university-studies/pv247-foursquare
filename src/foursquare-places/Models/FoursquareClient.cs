@@ -3,6 +3,7 @@ using FourSquare.SharpSquare.Entities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Net;
 
 namespace foursquare_places.Models
 {
@@ -40,15 +41,21 @@ namespace foursquare_places.Models
         /// </summary>
         /// <param name="accessToken">access token of authenticated user</param>
         /// <returns>current User</returns>
-        public User GetAuthenticatedUser(string accessToken)
+        public FUser GetAuthenticatedUser(string accessToken)
         {
             if (string.IsNullOrEmpty(accessToken))
                 throw new InvalidOperationException("No user is logged in.");
 
             sharpSquare.SetAccessToken(accessToken);
+            
+            User user = sharpSquare.GetUser("self");
+            if (user == null)
+                throw new WebException("User login failed");
 
-            return sharpSquare.GetUser("self");
+            return TransformToFUser(user);
         }
+
+        #region Private helper methods
 
         private List<Checkin> GetFriendsCheckins(string accessToken)
         {
@@ -103,5 +110,19 @@ namespace foursquare_places.Models
 
             return places;
         }
+
+        private FUser TransformToFUser(User user)
+        {
+            return new FUser
+            {
+                Id = user.id,
+                Name = user.firstName + user.lastName,
+                Photo = user.photo.prefix + user.photo.suffix,
+                HomeCity = user.homeCity,
+                FriendsCount = user.friends.count
+            };
+        }
+
+        #endregion
     }
 }

@@ -4,7 +4,7 @@
     var InfoboxFormatter = function () {
         function getContent(venue) {
             var container = document.createElement('div');
-            var name = document.createElement('h6');
+            var name = document.createElement('h5');
             name.innerHTML = venue.Name;
             container.appendChild(name);
 
@@ -32,6 +32,10 @@
             var checkins = document.createElement('p');
             checkins.innerHTML = "Checkins count: " + venue.CheckinsCount;
             container.appendChild(checkins);
+
+            var hereNow = document.createElement('p');
+            hereNow.innerHTML = "Here now: " + venue.HereNow;
+            container.appendChild(hereNow);
 
             return container;
 

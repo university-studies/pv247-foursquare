@@ -24,7 +24,9 @@
 
 <body ng-controller="AppController">
     <div class="container header-container">
-        <div id="header">Foursquare Places</div>
+        <div id="header">
+            <img src="~/Content/Images/foursquare.png" height="75"/>
+                 Foursquare Places</div>
     </div>
 
     <div class="container">
@@ -42,31 +44,45 @@
                     <ul class="nav navbar-nav">                    
                         <li><a href="#"
                                 ng-click="toggleCategory('Arts & Entertainment')"
-                                ng-class="{ 'filter-on' : categories['Arts & Entertainment']}">Fun</a>
+                                ng-class="{ 'filter-on' : categories['Arts & Entertainment']}">
+                                <img src="http://maps.google.com/mapfiles/kml/pal2/icon27.png" />
+                            Fun</a>
                         </li>
                         <li><a href="#" 
                                ng-click="toggleCategory('Restaurant')"
-                               ng-class="{ 'filter-on' : categories['Restaurant']}">Food</a>
+                               ng-class="{ 'filter-on' : categories['Restaurant']}">
+                                <img src="http://maps.google.com/mapfiles/kml/pal2/icon40.png" />
+                            Food</a>
                         </li>
                         <li><a href="#"
                                ng-click="toggleCategory('School & Business')"
-                               ng-class="{ 'filter-on' : categories['School & Business']}">Public</a>
+                               ng-class="{ 'filter-on' : categories['School & Business']}">
+                                <img src="http://maps.google.com/mapfiles/kml/pal2/icon61.png" />
+                            Public</a>
                         </li>
                         <li><a href="#" 
                                ng-click="toggleCategory('Residence & Recreation')"
-                               ng-class="{ 'filter-on' : categories['Residence & Recreation']}">Pasttime</a>
+                               ng-class="{ 'filter-on' : categories['Residence & Recreation']}">
+                                <img src="http://maps.google.com/mapfiles/kml/pal2/icon28.png" />
+                            Pasttime</a>
                         </li>
                         <li><a href="#" 
                                ng-click="toggleCategory('Travel & Transport')"
-                               ng-class="{ 'filter-on' : categories['Travel & Transport']}">Travel</a>
+                               ng-class="{ 'filter-on' : categories['Travel & Transport']}">
+                                <img src="http://maps.google.com/mapfiles/kml/pal2/icon56.png" />
+                            Travel</a>
                         </li>
                         <li><a href="#" 
                                ng-click="toggleCategory('Shop & Service')"
-                               ng-class="{ 'filter-on' : categories['Shop & Service']}">Shop</a>
+                               ng-class="{ 'filter-on' : categories['Shop & Service']}">
+                                <img src="http://maps.google.com/mapfiles/kml/pal3/icon26.png" />
+                            Shop</a>
                         </li>
                         <li><a href="#"
                                ng-click="toggleCategory('Unknown')"
-                               ng-class="{ 'filter-on' : categories['Unknown']}">Other</a>                        
+                               ng-class="{ 'filter-on' : categories['Unknown']}">
+                                <img src="http://maps.google.com/mapfiles/kml/pal3/icon31.png" />
+                            Other</a>                        
                         </li>                                                   
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

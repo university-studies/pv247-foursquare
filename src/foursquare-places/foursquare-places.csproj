@@ -133,6 +133,7 @@
     </Compile>
     <Compile Include="Models\FoursquareClient.cs" />
     <Compile Include="Models\FPlace.cs" />
+    <Compile Include="Models\FUser.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\VenueCategories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,6 +141,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\foursquare.png" />
     <Content Include="Content\jasmine\jasmine.css" />
     <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="Content\zocial.css" />

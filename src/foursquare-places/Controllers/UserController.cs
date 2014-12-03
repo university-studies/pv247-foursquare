@@ -20,8 +20,8 @@ namespace foursquare_places.Controllers
         {
             try
             {
-                User user = client.GetAuthenticatedUser(HttpContext.Current.Session["AccessToken"] as string);
-                return Request.CreateResponse<User>(HttpStatusCode.OK, user, "application/json");
+                FUser user = client.GetAuthenticatedUser(HttpContext.Current.Session["AccessToken"] as string);
+                return Request.CreateResponse<FUser>(HttpStatusCode.OK, user, "application/json");
             }
             catch (WebException webEx)
             {
