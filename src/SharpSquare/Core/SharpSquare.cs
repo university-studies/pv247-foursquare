@@ -159,6 +159,10 @@ namespace FourSquare.SharpSquare.Core
             // fix for invalid json format with "confident" property
             if (json.IndexOf(",\"confident") > 0)
                 json = json.Remove(json.IndexOf(",\"confident")).Trim() + "}}";
+
+            // fix for invalid json format with "emptyStream" property
+            if (json.IndexOf(",\"emptyStream") > 0)
+                json = json.Remove(json.IndexOf(",\"emptyStream")).Trim() + "}}";
             
             FourSquareMultipleResponse<T> fourSquareResponse = JsonConvert.DeserializeObject<FourSquareMultipleResponse<T>>(json);
             return fourSquareResponse;
