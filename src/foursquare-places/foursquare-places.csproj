@@ -131,12 +131,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\FoursquareClient.cs" />
+    <Compile Include="Service\FoursquareClient.cs" />
     <Compile Include="Models\FPlace.cs" />
     <Compile Include="Models\FUser.cs" />
     <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\TransformerHelpers.cs" />
-    <Compile Include="Models\VenueCategories.cs" />
+    <Compile Include="Service\TransformerHelpers.cs" />
+    <Compile Include="Service\VenueCategories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -205,7 +205,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Venues\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
