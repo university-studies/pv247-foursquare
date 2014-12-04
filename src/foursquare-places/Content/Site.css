@@ -3,13 +3,15 @@
 }
 
 body {
-    padding-top: 0.5%;
-    padding-bottom: 1.5%;
     height: 100%;
 }
 
 .body-content {
-    height: 85%;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    padding: 170px 15px 30px 15px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -46,13 +48,17 @@ textarea {
     }
 
 .header-container {
-    padding-bottom: 0.5%;
+    height: 95px;
 }
 
 #map {
         height: 100%;
         margin: 0px;
         padding: 0px
+}
+
+#areaMap {
+    height: 100%;
 }
 
 #map-canvas{
@@ -103,7 +109,7 @@ ul.filters > li > a:hover {
     color: #999999 !important;
 }
 
-@media(max-width: 400px){
+@media(max-width: 400px) {
     #header {
         font-size: 18px;
     }
@@ -114,17 +120,32 @@ ul.filters > li > a:hover {
 }
 
 footer {
-    padding-top: 1.5%;
     text-align: center;
+    padding-top: 5px;
 }
 
-footer > p {
+div#text {
+    color: lightgray;
     font-size: 0.9em;
-    color: darkgray;
+    margin: 0;
 }
 
-    footer:hover {
-        color: black;
+    div#text:hover {
+        color: darkgray;
+    }
+
+    div#text a {
+        color: lightgray;
+    }
+    
+    div#text a:link:hover, div#text a:visited:hover {
+        color: darkgray;
+        text-decoration: none;
+    }
+
+    div#text a:visited, div#text a:link {
+        color: lightgray;
+        text-decoration: none;
     }
 
 .current-pos {
@@ -137,4 +158,40 @@ footer > p {
 .navbar-collapse {
     padding-left: 0;
     padding-right: 0;
+}
+
+.navbar-nav {
+    margin: 0;
+}
+
+.map-container {
+    height: 100%;
+    position: relative;
+}
+
+.nav-container {
+    height: 65px;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 100%;
+    }
+}
+
+ul#login {
+    padding-top: 5px;
+    padding-right: 5px;
 }
