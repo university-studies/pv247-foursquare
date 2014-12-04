@@ -4,7 +4,15 @@
     var NavbarController = function ($scope, $window, MarkerUtils) {
 
         $scope.toggleCategory = function (category) {
-            $scope.categories[category] = !$scope.categories[category];            
+            $scope.navCollapsed = true
+            for (var cat in $scope.categories) {                
+                if (cat == category) {
+                    $scope.categories[cat] = true;
+                } else {
+                    $scope.categories[cat] = false;
+                }                
+            }
+                       
             MarkerUtils.filterMarkers($scope.markers, $scope.categories, $scope.map);
         };        
 
