@@ -31,7 +31,7 @@ namespace foursquare_places.Models
             parameters.Add("radius", "5000");   
          
             List<Venue> venues = sharpSquare.SearchVenues(parameters);
-            List<Checkin> friendsCheckins = string.IsNullOrEmpty(accessToken) ? null : GetFriendsCheckins(accessToken);
+            List<Checkin> friendsCheckins = GetFriendsCheckins(accessToken);
 
             return TransformToFPlaces(venues, friendsCheckins);
         }
@@ -59,16 +59,19 @@ namespace foursquare_places.Models
 
         private List<Checkin> GetFriendsCheckins(string accessToken)
         {
-            // set access token for SharpSquare service
-            sharpSquare.SetAccessToken(accessToken);
+            if (accessToken != null)
+            {
+                // set access token for SharpSquare service
+                sharpSquare.SetAccessToken(accessToken);
 
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("limit", "100");
-            parameters.Add("afterTimestamp", "14515200" /* 1 week in seconds */); 
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
+                parameters.Add("limit", "100");
+                parameters.Add("afterTimestamp", "14515200" /* 1 week in seconds */);
 
-            List<Checkin> checkins = sharpSquare.GetRecentCheckin(parameters);
-
-            return checkins;
+                return sharpSquare.GetRecentCheckin(parameters);
+            }
+            else
+                return null;
         }
 
         private List<FPlace> TransformToFPlaces(List<Venue> venues, List<Checkin> checkins)

@@ -126,3 +126,15 @@ footer > p {
     footer:hover {
         color: black;
     }
+
+.current-pos {
+    height: 32px;
+    clip: rect(0px,24px,34px,0px);
+    margin-left: 5px;
+    margin-right: -10px;
+}
+
+.navbar-collapse {
+    padding-left: 0;
+    padding-right: 0;
+}
