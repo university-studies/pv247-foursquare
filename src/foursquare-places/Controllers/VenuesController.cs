@@ -36,7 +36,7 @@ namespace foursquare_places.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError, "An error occured on server");
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
                 }
             }
             else
