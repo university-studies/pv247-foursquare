@@ -135,6 +135,7 @@
     <Compile Include="Models\FPlace.cs" />
     <Compile Include="Models\FUser.cs" />
     <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\TransformerHelpers.cs" />
     <Compile Include="Models\VenueCategories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

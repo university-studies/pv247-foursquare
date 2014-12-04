@@ -26,9 +26,9 @@ namespace foursquare_places.Controllers
                     var places = client.SearchPlaces(location, HttpContext.Current.Session["AccessToken"] as string);
                     return Request.CreateResponse<List<FPlace>>(HttpStatusCode.OK, places, "application/json");
                 }
-                catch (WebException webEx)
+                catch (InvalidOperationException ioEx)
                 {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Bad location data");
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, ioEx.Message);
                 }
                 catch (ArgumentNullException anEx)
                 {

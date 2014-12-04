@@ -23,10 +23,6 @@ namespace foursquare_places.Controllers
                 FUser user = client.GetAuthenticatedUser(HttpContext.Current.Session["AccessToken"] as string);
                 return Request.CreateResponse<FUser>(HttpStatusCode.OK, user, "application/json");
             }
-            catch (WebException webEx)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, webEx.Message);
-            }
             catch (InvalidOperationException ex)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);

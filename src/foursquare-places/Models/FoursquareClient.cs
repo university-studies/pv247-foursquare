@@ -9,7 +9,6 @@ namespace foursquare_places.Models
 {
     public class FoursquareClient
     {
-        private static VenueCategoriesManager venueCatManager = new VenueCategoriesManager();
         private static SharpSquare sharpSquare = new SharpSquare(
                 ConfigurationManager.AppSettings["ClientId"],
                 ConfigurationManager.AppSettings["ClientSecret"]);
@@ -28,12 +27,20 @@ namespace foursquare_places.Models
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("ll", location.ToString());
             parameters.Add("limit", "50");
-            parameters.Add("radius", "5000");   
-         
-            List<Venue> venues = sharpSquare.SearchVenues(parameters);
-            List<Checkin> friendsCheckins = GetFriendsCheckins(accessToken);
+            parameters.Add("radius", "5000");
 
-            return TransformToFPlaces(venues, friendsCheckins);
+            List<Checkin> friendsCheckins = GetFriendsRecentCheckins(accessToken);
+            List<Venue> venues = null;
+            try
+            {
+                venues = sharpSquare.SearchVenues(parameters);
+            }
+            catch (WebException webEx)
+            {
+                throw new InvalidOperationException("Bad location data");
+            }
+
+            return TransformerHelpers.TransformToFPlaces(venues, friendsCheckins);
         }
 
         /// <summary>
@@ -46,18 +53,28 @@ namespace foursquare_places.Models
             if (string.IsNullOrEmpty(accessToken))
                 throw new InvalidOperationException("No user is logged in.");
 
+            // set access token for SharpSquare service
             sharpSquare.SetAccessToken(accessToken);
-            
-            User user = sharpSquare.GetUser("self");
-            if (user == null)
-                throw new WebException("User login failed");
 
-            return TransformToFUser(user);
+            User user = null;
+            try
+            {
+                user = sharpSquare.GetUser("self");
+            }
+            catch (WebException webEx)
+            {
+                throw new InvalidOperationException("No user is logged in.", webEx);
+            }
+
+            return TransformerHelpers.TransformToFUser(user);
         }
 
-        #region Private helper methods
-
-        private List<Checkin> GetFriendsCheckins(string accessToken)
+        /// <summary>
+        /// Gets recent friends checkins of user which is authenticated under provided access token.
+        /// </summary>
+        /// <param name="accessToken">access token under which a specific user is logged in</param>
+        /// <returns>list of recent Checkins</returns>
+        public List<Checkin> GetFriendsRecentCheckins(string accessToken)
         {
             if (accessToken != null)
             {
@@ -68,64 +85,20 @@ namespace foursquare_places.Models
                 parameters.Add("limit", "100");
                 parameters.Add("afterTimestamp", "14515200" /* 1 week in seconds */);
 
-                return sharpSquare.GetRecentCheckin(parameters);
+                List<Checkin> checkins = null;
+                try
+                {
+                    checkins = sharpSquare.GetRecentCheckin(parameters);
+                }
+                catch (WebException webEx)
+                {
+                    return null;
+                }
+
+                return checkins;
             }
             else
                 return null;
         }
-
-        private List<FPlace> TransformToFPlaces(List<Venue> venues, List<Checkin> checkins)
-        {
-            List<FPlace> places = new List<FPlace>();
-            
-            if (venues != null)
-            {
-                venues.ForEach(venue =>
-                    {
-                        FPlace place = new FPlace
-                            {
-                                Id = venue.id,
-                                Name = venue.name,
-                                Location = new Location { Latitude = venue.location.lat, Longitude = venue.location.lng },
-                                Address = venue.location.address,
-                                City = venue.location.city,
-                                Country = venue.location.country,
-                                FormattedAddress = venue.location.formattedAddress,
-                                Phone = venue.contact.phone,
-                                Category = venueCatManager.GetOurCategory(venue.categories),
-                                CheckinsCount = venue.stats.checkinsCount,
-                                HereNow = venue.hereNow.count,
-                                Url = venue.url
-                            };
-
-                        if (checkins != null)
-                        {
-                            checkins.ForEach(checkin =>
-                            {
-                                if (checkin.venue != null && checkin.venue.id == venue.id)
-                                    place.FriendsHere.Add(checkin.user.firstName + " " + checkin.user.lastName);
-                            });
-                        }
-
-                        places.Add(place);
-                    });
-            }
-
-            return places;
-        }
-
-        private FUser TransformToFUser(User user)
-        {
-            return new FUser
-            {
-                Id = user.id,
-                Name = user.firstName + " " + user.lastName,
-                Photo = user.photo.prefix + user.photo.suffix.Substring(1),
-                HomeCity = user.homeCity,
-                FriendsCount = user.friends.count
-            };
-        }
-
-        #endregion
     }
 }
