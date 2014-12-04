@@ -7,6 +7,7 @@
         $scope.venues = [];
         $scope.categories = {};
         $scope.markers = [];
+        $scope.currentPosition = null;
         $scope.categories = {
             'Arts & Entertainment': true,
             'Restaurant': true,
@@ -15,6 +16,20 @@
             'Travel & Transport': true,
             'Shop & Service': true,
             'Unknown': true
+        };
+
+        $scope.addMapCenterChangedListener = function () {
+            google.maps.event.addListener($scope.map, 'center_changed', function () {
+                var newCenter = $scope.map.getCenter(),
+                    oldCenter = $scope.mapCenter,
+                    distance = Math.sqrt(Math.pow(newCenter.k - oldCenter.latitude, 2) + Math.pow(newCenter.B - oldCenter.longitude, 2));
+
+                if (distance > 0.0015) {
+                    $scope.$apply(function () {
+                        $scope.mapCenter = { latitude: newCenter.k, longitude: newCenter.B };
+                    });
+                }
+            });
         };
     }
 

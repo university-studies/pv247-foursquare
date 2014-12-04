@@ -44,6 +44,13 @@
                 </div>
                 <div class="navbar-collapse collapse" collapse="navCollapsed">
                     <ul class="nav navbar-nav filters">                    
+                        <li>
+                            <a href="#"
+                               ng-click="toCurrentPosition();">
+                                <img src="http://google.com/mapfiles/arrow.png" />
+                                You are here
+                            </a>
+                        </li>                        
                         <li><a href=""
                                 ng-click="toggleCategory('Arts & Entertainment')"
                                 ng-class="{ 'filter-on' : categories['Arts & Entertainment']}">

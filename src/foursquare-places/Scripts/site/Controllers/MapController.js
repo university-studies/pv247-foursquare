@@ -59,26 +59,16 @@
                 if (!$scope.map.initialized) {
                     var latitude = newValue.latitude,
                         longitude = newValue.longitude,
-                        maxZoom = 16;
+                        maxZoom = 14;
                     centerPosition = new google.maps.LatLng(latitude, longitude);
 
                     $scope.map.initialized = true;
-                    $scope.map.setZoom(18);
+                    $scope.map.setZoom(16);
                     $scope.map.setCenter(centerPosition);
 
                     MarkerFormatter.markPosition($scope.map, centerPosition);
 
-                    google.maps.event.addListener($scope.map, 'center_changed', function () {
-                        var newCenter = $scope.map.getCenter(),
-                            oldCenter = $scope.mapCenter,
-                            distance = Math.sqrt(Math.pow(newCenter.k - oldCenter.latitude, 2) + Math.pow(newCenter.B - oldCenter.longitude, 2));
-
-                        if (distance > 0.0015) {
-                            $scope.$apply(function () {
-                                $scope.mapCenter = { latitude: newCenter.k, longitude: newCenter.B };
-                            });
-                        }
-                    });
+                    $scope.addMapCenterChangedListener();
 
                     google.maps.event.addListener($scope.map, 'zoom_changed', function () {
                         if ($scope.map.getZoom() < maxZoom) {
@@ -88,6 +78,8 @@
                 }
             }
         });
+
+        
 
         $scope.$watch('venues', function (newValue, oldValue) {
 
