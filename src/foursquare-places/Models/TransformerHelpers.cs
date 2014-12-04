@@ -29,15 +29,19 @@ namespace foursquare_places.Models
                     {
                         Id = venue.id,
                         Name = venue.name,
-                        Location = new Location { Latitude = venue.location.lat, Longitude = venue.location.lng },
-                        Address = venue.location.address,
-                        City = venue.location.city,
-                        Country = venue.location.country,
-                        FormattedAddress = venue.location.formattedAddress,
-                        Phone = venue.contact.phone,
-                        Category = venueCatManager.GetOurCategory(venue.categories),
-                        CheckinsCount = venue.stats.checkinsCount,
-                        HereNow = venue.hereNow.count,
+                        Location = new Location 
+                            {
+                                Latitude = venue.location != null ? venue.location.lat : 0,
+                                Longitude = venue.location != null ? venue.location.lng : 0 
+                            },
+                        Address = venue.location != null ? venue.location.address : string.Empty,
+                        City = venue.location != null ? venue.location.city : string.Empty,
+                        Country = venue.location != null ? venue.location.country : string.Empty,
+                        FormattedAddress = venue.location != null ? venue.location.formattedAddress : null,
+                        Phone = venue.contact != null ? venue.contact.phone : string.Empty,
+                        Category = venue.categories != null ? venueCatManager.GetOurCategory(venue.categories) : string.Empty,
+                        CheckinsCount = venue.stats != null ? venue.stats.checkinsCount : 0,
+                        HereNow = venue.hereNow != null ? venue.hereNow.count : 0,
                         Url = venue.url
                     };
 
@@ -45,7 +49,7 @@ namespace foursquare_places.Models
                     {
                         checkins.ForEach(checkin =>
                         {
-                            if (checkin.venue != null && checkin.venue.id == venue.id)
+                            if (checkin.venue != null && checkin.venue.id == venue.id && checkin.user != null)
                                 place.FriendsHere.Add(checkin.user.firstName + " " + checkin.user.lastName);
                         });
                     }
@@ -69,10 +73,11 @@ namespace foursquare_places.Models
             return new FUser
             {
                 Id = user.id,
-                Name = user.firstName + " " + user.lastName,
-                Photo = user.photo.prefix + user.photo.suffix.Substring(1),
+                Name = user.firstName != null && user.lastName != null ?
+                        user.firstName + " " + user.lastName : string.Empty,
+                Photo = user.photo != null ? user.photo.prefix + user.photo.suffix.Substring(1) : string.Empty,
                 HomeCity = user.homeCity,
-                FriendsCount = user.friends.count
+                FriendsCount = user.friends != null ? user.friends.count : 0
             };
         }
     }
