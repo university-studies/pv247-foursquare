@@ -116,8 +116,8 @@ namespace foursquare_places.Models
             return new FUser
             {
                 Id = user.id,
-                Name = user.firstName + user.lastName,
-                Photo = user.photo.prefix + user.photo.suffix,
+                Name = user.firstName + " " + user.lastName,
+                Photo = user.photo.prefix + user.photo.suffix.Substring(1),
                 HomeCity = user.homeCity,
                 FriendsCount = user.friends.count
             };

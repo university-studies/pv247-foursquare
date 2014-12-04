@@ -5,7 +5,9 @@
         function createContent(venue) {
             var container = document.createElement('div');
             container.className = container.className + " infobox";
+            console.log(container.className);
             var name = document.createElement('h5');
+            name.classList.add('name');
             name.innerHTML = venue.Name;
             container.appendChild(name);
 
@@ -24,13 +26,9 @@
                 container.appendChild(linkContainer);
             }
 
-            var checkins = document.createElement('p');
-            checkins.innerHTML = "Checkins count: " + venue.CheckinsCount;
-            container.appendChild(checkins);
-
-            var hereNow = document.createElement('p');
-            hereNow.innerHTML = "Here now: " + venue.HereNow;
-            container.appendChild(hereNow);
+            var p = document.createElement('p');
+            p.innerHTML = "Checkins count: " + venue.CheckinsCount + "<br/>" + "Here now: " + venue.HereNow;
+            container.appendChild(p);
 
             return container;
 
