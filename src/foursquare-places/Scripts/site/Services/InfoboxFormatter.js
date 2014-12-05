@@ -35,13 +35,21 @@
             hereNow.innerHTML = "Here now: " + venue.HereNow;
             container.appendChild(hereNow);
 
-            var friends = document.createElement('ul');
-            angular.forEach(venue.Friends, function (value, key) {
-                var li = document.createElement('li');
-                li.innerHTML = value;
+            var f = document.createElement('p'),
+                friends = document.createElement('ul');
+            f.innerHTML = "Friends here: ";            
+            angular.forEach(venue.FriendsHere, function (value, key) {
+                var li = document.createElement('li'),
+                 span = document.createElement('span');
+                li.appendChild(span)
+                span.innerHTML = value;
                 friends.appendChild(li);
+                console.log(key + ": " + value)
             });
-            container.appendChild(friends);
+            f.appendChild(friends);
+            if (venue.FriendsHere.length > 0) {
+                container.appendChild(f);
+            }           
 
             console.log(venue);
 

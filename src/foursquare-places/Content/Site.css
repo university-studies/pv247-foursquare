@@ -87,6 +87,20 @@ textarea {
     width: auto;
 }
 
+.infobox p li span {
+    position: relative;   
+}
+
+.infobox p li {   
+    margin: 0;
+}
+
+.infobox p ul {
+  margin-left: 10px;  
+  text-align: left;  
+}
+
+
 h5.name {
     font-weight: bolder;
 }

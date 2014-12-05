@@ -84,7 +84,6 @@
         $scope.$watch('venues', function (newValue, oldValue) {
             console.log($scope.venues)
             newValue.forEach(function (item, i) {
-
                 var marker,
                     isNotDuplicateItem = MarkerUtils.findDuplicate(item, $scope.markers);
 
