@@ -183,6 +183,7 @@
     <Content Include="Scripts\site\Services\InfoboxFormatter.js" />
     <Content Include="Scripts\site\Services\MarkerFormatter.js" />
     <Content Include="Scripts\site\Services\MarkerUtils.js" />
+    <Content Include="Scripts\site\Services\UserLoader.js" />
     <Content Include="Scripts\site\Services\VenuesLoader.js" />
     <Content Include="Scripts\spec\karma.conf.js" />
     <Content Include="Scripts\spec\MarkerFormatterSpec.js" />

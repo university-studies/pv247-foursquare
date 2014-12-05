@@ -26,9 +26,21 @@
                 container.appendChild(linkContainer);
             }
 
-            var p = document.createElement('p');
-            p.innerHTML = "Checkins count: " + venue.CheckinsCount + "<br/>" + "Here now: " + venue.HereNow;
-            container.appendChild(p);
+            var checkins = document.createElement('p');
+            checkins.innerHTML = "Checkins count: " + venue.CheckinsCount;
+            container.appendChild(checkins);
+
+            var hereNow = document.createElement('p');
+            hereNow.innerHTML = "Here now: " + venue.HereNow;
+            container.appendChild(hereNow);
+
+            var friends = document.createElement('ul');
+            angular.forEach(venue.Friends, function (value, key) {
+                var li = document.createElement('li');
+                li.innerHTML = value;
+                friends.appendChild(li);
+            });
+            container.appendChild(friends);
 
             return container;
 

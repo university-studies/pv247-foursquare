@@ -25,7 +25,7 @@ namespace foursquare_places.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                return Request.CreateResponse(HttpStatusCode.OK, new FUser(), "application/json");
             }            
         }
     }

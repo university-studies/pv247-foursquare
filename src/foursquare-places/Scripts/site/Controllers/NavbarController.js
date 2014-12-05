@@ -1,20 +1,28 @@
-﻿define(["foursquare-module", "Services/MarkerUtils"], function (app) {
+﻿define(["foursquare-module", "Services/MarkerUtils", "Services/UserLoader"], function (app) {
 
-    var injectParams = ['$scope', '$window', 'MarkerUtils'];
-    var NavbarController = function ($scope, $window, MarkerUtils) {
+    var injectParams = ['$scope', '$window', 'MarkerUtils', 'UserLoader'];
+    var NavbarController = function ($scope, $window, MarkerUtils, UserLoader) {
 
         var initNavbarStyle = true;
+        $scope.userInfo = null;
+
+        UserLoader.getUser().then(function (data) {      
+             $scope.userInfo = data;          
+             console.log(data);
+        });
+        debugger;
 
         $scope.toggleCategory = function (category) {
             $scope.navCollapsed = true;
             initNavbarStyle = false;
-            for (var cat in $scope.categories) {                
-                if (cat == category) {
-                    $scope.categories[cat] = true;
+            angular.forEach($scope.categories, function (value, key) {
+                if (key == category) {                    
+                    $scope.categories[key] = true;
                 } else {
-                    $scope.categories[cat] = false;
-                }                
-            }
+                    $scope.categories[key] = false;
+                }
+                console.log(key)
+            });            
                        
             MarkerUtils.filterMarkers($scope.markers, $scope.categories, $scope.map);
         };        

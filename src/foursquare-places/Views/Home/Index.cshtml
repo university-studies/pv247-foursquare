@@ -97,8 +97,11 @@
                     <ul class="nav navbar-nav navbar-right" id="login">
                         <li>
                             <a id="loginButton" href="http://foursquare-places.azurewebsites.net/Home/Login/"
-                               class="zocial foursquare">Log in</a>
-                        </li>     
+                               class="zocial foursquare"
+                               ng-show="userInfo.Name === '' " 
+                               ng-cloak>Log in</a>
+                            <div ng-show="userInfo.Name">my oh my</div>
+                        </li>                        
                     </ul>
                 </div>
             </div>
