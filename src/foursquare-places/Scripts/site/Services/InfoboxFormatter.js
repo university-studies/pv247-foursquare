@@ -4,8 +4,9 @@
     var InfoboxFormatter = function () {
         function createContent(venue) {
             var container = document.createElement('div');
+
             container.className = container.className + " infobox";
-            console.log(container.className);
+
             var name = document.createElement('h5');
             name.classList.add('name');
             name.innerHTML = venue.Name;
@@ -41,6 +42,8 @@
                 friends.appendChild(li);
             });
             container.appendChild(friends);
+
+            console.log(venue);
 
             return container;
 

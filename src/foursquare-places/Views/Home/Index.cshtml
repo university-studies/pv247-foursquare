@@ -100,7 +100,9 @@
                                class="zocial foursquare"
                                ng-show="userInfo.Name === '' " 
                                ng-cloak>Log in</a>
-                            <div ng-show="userInfo.Name">my oh my</div>
+                            <div ng-show="userInfo.Name"
+                                 class="userInfo"
+                                 ng-cloak>{{ userInfo.Name }}</div>                            
                         </li>                        
                     </ul>
                 </div>

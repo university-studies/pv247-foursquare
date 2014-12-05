@@ -9,7 +9,7 @@
         UserLoader.getUser().then(function (data) {      
              $scope.userInfo = data;          
              console.log(data);
-        });
+        });       
         
 
         $scope.toggleCategory = function (category) {
