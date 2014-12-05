@@ -10,7 +10,7 @@
              $scope.userInfo = data;          
              console.log(data);
         });
-        debugger;
+        
 
         $scope.toggleCategory = function (category) {
             $scope.navCollapsed = true;
