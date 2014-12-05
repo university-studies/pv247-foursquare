@@ -40,18 +40,16 @@
             f.innerHTML = "Friends here: ";            
             angular.forEach(venue.FriendsHere, function (value, key) {
                 var li = document.createElement('li'),
-                 span = document.createElement('span');
+                    span = document.createElement('span');
                 li.appendChild(span)
                 span.innerHTML = value;
                 friends.appendChild(li);
-                console.log(key + ": " + value)
+                
             });
             f.appendChild(friends);
             if (venue.FriendsHere.length > 0) {
                 container.appendChild(f);
             }           
-
-            console.log(venue);
 
             return container;
 

@@ -20,9 +20,9 @@
 
        function filterMarkers (markers, categories, map) {
             angular.forEach(markers, function (value, key) {
-                if (categories[value.category] && value.map == null) {
+                if (categories[value.category] && value.map === null) {
                     value.setMap(map);
-                } else if (!categories[value.category] && value.map != null) {
+                } else if (!categories[value.category] && value.map !== null) {
                     value.setMap(null);
                 }
             });

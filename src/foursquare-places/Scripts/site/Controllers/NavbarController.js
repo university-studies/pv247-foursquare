@@ -7,8 +7,8 @@
         $scope.userInfo = null;
 
         UserLoader.getUser().then(function (data) {      
-             $scope.userInfo = data;          
-             console.log(data);
+             $scope.userInfo = data;         
+             
         });       
         
 
@@ -20,8 +20,7 @@
                     $scope.categories[key] = true;
                 } else {
                     $scope.categories[key] = false;
-                }
-                console.log(key)
+                }                
             });            
                        
             MarkerUtils.filterMarkers($scope.markers, $scope.categories, $scope.map);

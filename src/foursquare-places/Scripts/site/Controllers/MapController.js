@@ -9,8 +9,7 @@
             maxWidth: 150,
             pixelOffset: new google.maps.Size(-110, 0),
             zIndex: null,
-            boxStyle: {
-                //background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
+            boxStyle: {                
                 width: "220px"
             },
             closeBoxMargin: "0px -9px 0px 0px",

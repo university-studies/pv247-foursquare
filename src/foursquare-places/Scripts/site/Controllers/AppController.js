@@ -4,8 +4,7 @@
     var AppController = function ($scope, $window) {
 
         $scope.map = null;
-        $scope.venues = [];
-        $scope.categories = {};
+        $scope.venues = [];        
         $scope.markers = [];
         $scope.currentPosition = null;
         $scope.categories = {
