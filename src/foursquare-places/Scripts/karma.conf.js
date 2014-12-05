@@ -1,10 +1,5 @@
 // Karma configuration
-// Generated on Sun Nov 16 2014 16:59:49 GMT+0100 (Central Europe Standard Time)
-
-//setup info:
-//http://sirarsalih.com/2013/10/28/test-driving-your-javascript-visual-studio-jasmine-karma-test-runner/
-//http://blog.ploeh.dk/2013/09/13/karma-from-bash-on-windows/
-
+// Generated on Fri Dec 05 2014 17:35:32 GMT+0100 (Central Europe Standard Time)
 
 module.exports = function(config) {
   config.set({
@@ -15,22 +10,17 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'requirejs'],
 
 
     // list of files / patterns to load in the browser
-    files: [        
-        '../angular.js',
-        '../angular-mocks.js',
-        '../angular-resource.js',
-        '../ui-bootstrap-tpls-0.11.2.js',
-        '../gmaps.js',
-        '../site/foursquare-module.js',
-        './MarkerFormatterSpec.js',
-        '../site/Services/MarkerFormatter.js',
-        './MarkerUtilsSpec.js',
-        '../site/Services/MarkerUtils.js',
-        '../site/Services/InfoboxFormatter.js'
+    files: [
+        {pattern: 'angular.js', included: true },
+        {pattern: 'angular-mocks.js', included: true },
+        {pattern: 'angular-resource.js', included: true },
+        {pattern: 'site/foursquare-module.js', included: false },
+        {pattern: 'spec/CanarySpec.js', included: false},
+        'spec/test-main.js'
     ],
 
 
