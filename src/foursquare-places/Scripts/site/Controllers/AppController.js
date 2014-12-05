@@ -1,7 +1,7 @@
 ﻿define(["foursquare-module"], function (app) {
 
-    var injectParams = ['$scope'];
-    var AppController = function ($scope) {
+    var injectParams = ['$scope', '$window'];
+    var AppController = function ($scope, $window) {
 
         $scope.map = null;
         $scope.venues = [];
@@ -31,6 +31,10 @@
                 }
             });
         };
+
+        if ($window.location.hash && $window.location.hash == '#_=_') {
+            $window.location.hash = '';
+        }
     }
 
     AppController.$inject = injectParams;
