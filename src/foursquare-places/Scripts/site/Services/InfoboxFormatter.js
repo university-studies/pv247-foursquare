@@ -34,7 +34,7 @@
 
             var f = document.createElement('p'),
                 friends = document.createElement('ul');
-            f.classList.add = "friends";
+            f.classList.add("friends");
             f.innerHTML = "Friends here: <br/>";
             angular.forEach(venue.FriendsHere, function (value, key) {
                 var li = document.createElement('li'),
