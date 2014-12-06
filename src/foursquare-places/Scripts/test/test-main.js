@@ -11,10 +11,10 @@ requirejs.config({
     // Karma serves files from '/base'
 
     paths: {
-        angular: '/base/angular',
-        angularResource: '/base/angular-resource',
-        angularMocks: '/base/angular-mocks',
-        uiBootstrap: '/base/ui-bootstrap-tpls-0.11.2'
+        angular: '/base/lib/angular',
+        angularResource: '/base/lib/angular-resource',
+        angularMocks: '/base/lib/angular-mocks',
+        uiBootstrap: '/base/lib/ui-bootstrap-tpls-0.11.2'
     },
 
     baseUrl: '/base/site',

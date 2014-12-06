@@ -1,8 +1,9 @@
 ﻿require.config({
+
     paths: {
-        angular: '../angular',
-        angularResource: '../angular-resource',
-        uiBootstrap: '../ui-bootstrap-tpls-0.11.2'
+        angular: '../lib/angular',
+        angularResource: '../lib/angular-resource',
+        uiBootstrap: '../lib/ui-bootstrap-tpls-0.11.2'
     },
 
     shim: {
