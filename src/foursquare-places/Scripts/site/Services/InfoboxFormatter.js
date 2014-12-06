@@ -27,17 +27,15 @@
                 container.appendChild(linkContainer);
             }
 
-            var checkins = document.createElement('p');
-            checkins.innerHTML = "Checkins count: " + venue.CheckinsCount;
-            container.appendChild(checkins);
-
-            var hereNow = document.createElement('p');
-            hereNow.innerHTML = "Here now: " + venue.HereNow;
-            container.appendChild(hereNow);
+            var checkinsAndHereNow = document.createElement('p');
+            checkinsAndHereNow.innerHTML = "Checkins count: " + venue.CheckinsCount +
+                "<br/>Here now: " + venue.HereNow;
+            container.appendChild(checkinsAndHereNow);
 
             var f = document.createElement('p'),
                 friends = document.createElement('ul');
-            f.innerHTML = "Friends here: ";            
+            f.classList.add = "friends";
+            f.innerHTML = "Friends here: <br/>";
             angular.forEach(venue.FriendsHere, function (value, key) {
                 var li = document.createElement('li'),
                     span = document.createElement('span');

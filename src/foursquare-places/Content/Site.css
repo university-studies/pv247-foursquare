@@ -38,8 +38,9 @@ textarea {
 
 #header {
     font-size: 27px;    
-    padding: 1% 1%;
+    padding: 0.5% 1% 0% 1%;
     text-align: center;
+    height: 95px;
 }
     #header a {
         text-decoration: none;
@@ -88,17 +89,24 @@ textarea {
 }
 
 .infobox p li span {
-    position: relative;   
+    position: relative;  
+    font-weight: normal;
 }
 
 .infobox p li {   
     margin: 0;
 }
 
-.infobox p ul {
-  margin-left: 10px;  
-  text-align: left;  
+.infobox p ul {  
+    margin-left: -10px;
+    color: lightpink;  
 }
+
+    .infobox .friends {
+        text-align: left;
+        margin-left: 50px;
+        font-weight: bold;
+    }
 
 
 h5.name {
