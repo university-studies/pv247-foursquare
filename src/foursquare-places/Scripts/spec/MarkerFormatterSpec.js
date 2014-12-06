@@ -1,64 +1,73 @@
-﻿describe("Factory: MarkerFormatter", function () {
-    var venue, location, map, categories, marker;
+﻿define(["angularMocks", "foursquare-module", "Services/MarkerFormatter"], function (mocks, app, MarkerFormatter) {
 
+    describe("Factory: MarkerFormatter", function () {
+        var venue, location, map, categories, marker;
 
-    beforeEach(module('FoursquareModule'));
+        beforeEach(module('FoursquareModule'));
 
-    beforeEach(inject(function ($injector) {
+        beforeEach(inject(function ($injector) {
+            MarkerFormatter = $injector.get('MarkerFormatter');
+            map = new google.maps.Map(document.createElement("p"), {});
+            location = { Latitude: 58.68, Longitude: 48.24 }
 
-        MarkerFormatter = $injector.get('MarkerFormatter');
-        map = new google.maps.Map(document.createElement("p"), {});
-        location = { Latitude: 58.68, Longitude: 48.24 }
+        }));
 
-    }));
+        it("should return marker", function () {
+            console.log("should return marker");
 
-    it("should return marker", function () {
-        venue = { Location: location };
-        categories = {};
+            venue = { Location: location };
+            categories = {};
 
-        marker = MarkerFormatter.markVenue(venue, map, categories);
+            marker = MarkerFormatter.markVenue(venue, map, categories);
 
-        expect(marker).toBeDefined();
-        expect(marker).toBeTruthy();
-    });
+            expect(marker).toBeDefined();
+            expect(marker).toBeTruthy();
+        });
 
-    it("should return marker with id, title, category, clickable, map", function () {
-        venue = {
-            Id: 1,
-            Name: 'mocked venue',
-            Location: location,
-            Category: 'Unknown',
-            CheckinsCount: 150,
+        it("should return marker with id, title, category, clickable, map", function () {
+            console.log("should return marker with id, title, category, clickable, map");
 
-        };
-        categories = { 'Unknown': true };
+            venue = {
+                Id: 1,
+                Name: 'mocked venue',
+                Location: location,
+                Category: 'Unknown',
+                CheckinsCount: 150,
 
-        marker = MarkerFormatter.markVenue(venue, map, categories);
+            };
+            categories = { 'Unknown': true };
 
-        expect(marker.clickable).toBe(true);
-        expect(marker.title).toBe(venue.Name);
-        expect(marker.category).toBe(venue.Category);
-        expect(marker.id).toBe(venue.Id);
-        expect(marker.map).toBe(map);
+            marker = MarkerFormatter.markVenue(venue, map, categories);
 
-    });
+            expect(marker.clickable).toBe(true);
+            expect(marker.title).toBe(venue.Name);
+            expect(marker.category).toBe(venue.Category);
+            expect(marker.id).toBe(venue.Id);
+            expect(marker.map).toBe(map);
 
-    it("should return marker with position set", function () {
-        venue = { Location: location };
-        categories = { 'Unknown': true };
+        });
 
-        marker = MarkerFormatter.markVenue(venue, map, categories);
+        it("should return marker with position set", function () {
+            console.log("should return marker with position set");
 
-        expect(marker.position.k).toBeCloseTo(58.68);
-        expect(marker.position.B).toBeCloseTo(48.24);
-    });
+            venue = { Location: location };
+            categories = { 'Unknown': true };
 
-    it("should return marker without map set if category is filtered", function () {
-        venue = { Location: location, Category: 'Unknown' };
-        categories = { 'Unknown': false };
+            marker = MarkerFormatter.markVenue(venue, map, categories);
 
-        maker = MarkerFormatter.markVenue(venue, map, categories);
+            expect(marker.position.k).toBeCloseTo(58.68);
+            expect(marker.position.B).toBeCloseTo(48.24);
+        });
 
-        expect(marker.map).toBeNull();
+        it("should return marker without map set if category is filtered", function () {
+            console.log("should return marker without map set if category is filtered");
+
+            venue = { Location: location, Category: 'Unknown' };
+            categories = { 'Unknown': false };
+
+            maker = MarkerFormatter.markVenue(venue, map, categories);
+
+            expect(marker.map).toBeNull();
+        });
     });
 });

@@ -15,19 +15,18 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        { pattern: 'angular.js', included: true },
-        { pattern: 'angular-mocks.js', included: true },
-        { pattern: 'angular-resource.js', included: true },
-        { pattern: 'ui-bootstrap-tpls-0.11.2.js', included: true },
         { pattern: 'gmaps.js', included: true },
-        { pattern: 'site/foursquare-module.js', included: false },
-        { pattern: 'spec/CanarySpec.js', included: false },        
-        'spec/test-main.js'
+        { pattern: '*.js', included: false },
+        { pattern: "site/**/*.js", included: false},
+        { pattern: "spec/**/*Spec.js", included: false },
+
+        'spec/test-main.js',
     ],
 
 
     // list of files to exclude
     exclude: [
+        "site/main.js"
     ],
 
 

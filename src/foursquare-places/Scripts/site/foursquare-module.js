@@ -1,4 +1,4 @@
-﻿define([], function () {
+﻿define(["angular", "angularResource", "uiBootstrap"], function (angular) {
 
     var app = angular.module('FoursquareModule', ['ngResource', 'ui.bootstrap']);
     app.config(['$controllerProvider', '$compileProvider', '$filterProvider', '$provide',

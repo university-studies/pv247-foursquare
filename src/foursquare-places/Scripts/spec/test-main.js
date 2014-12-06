@@ -9,23 +9,32 @@ for (var file in window.__karma__.files) {
 
 requirejs.config({
     // Karma serves files from '/base'
-    baseUrl: '/base/site',
 
     paths: {
-        //'jquery': '../lib/jquery',
-        //'underscore': '../lib/underscore',
-        'foursquare-module': 'foursquare-module'
+        angular: '/base/angular',
+        angularResource: '/base/angular-resource',
+        angularMocks: '/base/angular-mocks',
+        uiBootstrap: '/base/ui-bootstrap-tpls-0.11.2'
     },
+
+    baseUrl: '/base/site',
 
     shim: {
-        /*'underscore': {
-            exports: '_'
-        }*/
-    },
+        'angular': {'exports': 'angular'},
+        'angularResource': ['angular'],
+        'uiBootstrap': {
+            deps: ['angular'],
+            exports: 'uiBootstrap'
+        },
+            'angularMocks': {
+                deps: ['angular'],
+                'exports': 'angular.mock'
+            }
+        },
 
-    // ask Require.js to load these files (all our tests)
+    /**
+    Nacita vsetky subory
+    */
     deps: tests,
-
-    // start test run, once Require.js is done
     callback: window.__karma__.start
 });
