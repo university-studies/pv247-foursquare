@@ -223,3 +223,7 @@ ul#login {
     padding-top: 5px;
     padding-right: 5px;
 }
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
