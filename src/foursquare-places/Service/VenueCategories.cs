@@ -25,10 +25,10 @@ namespace foursquare_places.Models
             if (categories == null || categories.Count == 0)
                 return "Unknown";
 
-            var rootCategory = RootCategoryMappings[categories[0]];
-            if (rootCategory == null)
+            if (!RootCategoryMappings.ContainsKey(categories[0]))
                 return "Unknown";
 
+            var rootCategory = RootCategoryMappings[categories[0]];
             switch(rootCategory.id)
             {
                 case "4d4b7104d754a06370d81259":
